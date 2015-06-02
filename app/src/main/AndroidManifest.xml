@@ -20,6 +20,18 @@
             android:name=".DashBoardActivity"
             android:label="@string/title_activity_dash_board" >
         </activity>
+        <activity
+            android:name=".EmpresaActivity"
+            android:label="@string/title_activity_empresa" >
+        </activity>
+        <activity
+            android:name=".ComerciaisActivity"
+            android:label="@string/title_activity_comerciais" >
+        </activity>
+        <activity
+            android:name=".AgendaActivity"
+            android:label="@string/title_activity_agenda" >
+        </activity>
     </application>
 
 </manifest>
