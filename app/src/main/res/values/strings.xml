@@ -1,10 +1,22 @@
 <resources>
-    <string name="app_name">Project One</string>
 
+    <!--TEXTOS A UTILIZAR NA ACTIVIDADE SPLASH-->
+    <string name="app_name">Project One</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="btdash">Dashboard</string>
+
+    <!--TEXTOS A UTILIZAR NA ACTIVIDADE DASHBOARD-->
     <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="btagenda">Agenda</string>
+
+    <!--TEXTOS A UTILIZAR NA ACTIVIDADE EMPRESA-->
     <string name="title_activity_empresa">EmpresaActivity</string>
+
+    <!--TEXTOS A UTILIZAR NA ACTIVIDADE COMERCIAIS-->
     <string name="title_activity_comerciais">ComerciaisActivity</string>
+
+    <!--TEXTOS A UTILIZAR NA ACTIVIDADE AGENDA-->
     <string name="title_activity_agenda">AgendaActivity</string>
+
 </resources>
