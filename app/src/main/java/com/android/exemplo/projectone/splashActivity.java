@@ -4,17 +4,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 
+
+
 public class splashActivity extends Activity {
 
     Button BTtodash;
 
-    private final int DURATION = 3000;
+    private final int DURATION = 5000;
     private Thread mSplashThread;
 
     @Override
@@ -22,35 +25,18 @@ public class splashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        mSplashThread = new Thread() {
-
+        // Add delay so that Splash Screen is displayed for 3secs
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                synchronized (this) {
-                    try {
-                        wait(DURATION);
-                    } catch (InterruptedException e) {
-                    } finally {
-                        finish();
-                        Intent intent = new Intent(getBaseContext(), DashBoardActivity.class);
-                        startActivity(intent);
-                    }
-                }
+
+                Intent loginPage = new Intent(splashActivity.this, DashBoardActivity.class);
+                startActivity(loginPage);
             }
-//            BTtodash=(Button)findViewById(R.id.BTtodash);
-//
-//        BTtodash.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent= new Intent(splashActivity.this,DashBoardActivity.class);
-//                startActivity(intent);
-//
-        };
-
-
-
-        mSplashThread.start();
+        }, DURATION);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
