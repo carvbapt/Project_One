@@ -1,6 +1,7 @@
 package com.android.exemplo.projectone;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,23 +14,42 @@ public class splashActivity extends Activity {
 
     Button BTtodash;
 
+    private final int DURATION = 3000;
+    private Thread mSplashThread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        BTtodash=(Button)findViewById(R.id.BTtodash);
+        mSplashThread = new Thread() {
 
-        BTtodash.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(splashActivity.this,DashBoardActivity.class);
-                startActivity(intent);
+            public void run() {
+                synchronized (this) {
+                    try {
+                        wait(DURATION);
+                    } catch (InterruptedException e) {
+                    } finally {
+                        finish();
+                        Intent intent = new Intent(getBaseContext(), DashBoardActivity.class);
+                        startActivity(intent);
+                    }
+                }
             }
-        });
+//            BTtodash=(Button)findViewById(R.id.BTtodash);
+//
+//        BTtodash.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent= new Intent(splashActivity.this,DashBoardActivity.class);
+//                startActivity(intent);
+//
+        };
 
 
 
+        mSplashThread.start();
     }
 
     @Override
