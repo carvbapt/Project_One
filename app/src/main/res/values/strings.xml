@@ -18,5 +18,7 @@
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE AGENDA-->
     <string name="title_activity_agenda">AgendaActivity</string>
-
+    <string name="customize">Customize</string>
+    <string name="show_dialog">Show Dialog</string>
+    <string name="undo">Undo</string>
 </resources>
