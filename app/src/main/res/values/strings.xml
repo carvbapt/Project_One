@@ -13,6 +13,8 @@
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE EMPRESA-->
     <string name="title_activity_empresa">Empresa</string>
     <string name="btempresa">Empresa</string>
+    <string name="action_search">Search</string>
+    <string name="action_mail">Mail</string>
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE COMERCIAIS-->
     <string name="title_activity_comerciais">Comerciais</string>
@@ -23,4 +25,6 @@
     <string name="customize">Customize</string>
     <string name="show_dialog">Show Dialog</string>
     <string name="undo">Undo</string>
+    <string name="title_activity_empdetal_">Empdetal_Activity</string>
+    <string name="title_activity_emp_detal">EmpDetalActivity</string>
 </resources>
