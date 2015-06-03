@@ -8,12 +8,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,46 +24,69 @@ import java.security.NoSuchAlgorithmException;
 
 public class splashActivity extends Activity {
 
-    private final int DURATION = 5000;
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
-    EditText user,pass;
     String username,password;
+    AlertDialog.Builder alertDialogBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        user = (EditText)findViewById(R.id.login_name);
-        pass = (EditText)findViewById(R.id.login_password);
 
-        final String[] previousConfigSortCode = (String[]) getLastNonConfigurationInstance();
-
-        if (previousConfigSortCode != null) {
-            user.setText(previousConfigSortCode[0].toString());
-            pass.setText(previousConfigSortCode[1].toString());
-        }else {
-        // Add delay so that Splash Screen is displayed for 3secs
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showLoginDialog();
-            }
-        }, DURATION);
+        final String previousConfigSortCode[] = (String[]) getLastNonConfigurationInstance();
+        if (previousConfigSortCode!=null) {
+            username = previousConfigSortCode[1];
+            password = previousConfigSortCode[2];
         }
+        showLoginDialog();
     }
+
+
 
     public void showLoginDialog()
     {
         LayoutInflater li = LayoutInflater.from(this);
         View prompt = li.inflate(R.layout.login_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(prompt);
 
-        final EditText user = (EditText) prompt.findViewById(R.id.login_name);
-        final EditText pass = (EditText) prompt.findViewById(R.id.login_password);
+        final EditText
+                user = (EditText) prompt.findViewById(R.id.login_name);
+        final EditText
+                pass = (EditText) prompt.findViewById(R.id.login_password);
         //user.setText(Login_USER); //login_USER and PASS are loaded from previous session (optional)
+
+        user.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                username = user.getText().toString();
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {  }
+        });
+
+        pass.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                password = pass.getText().toString();
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+        });
+
+        final String previousConfigSortCode[] = (String[]) getLastNonConfigurationInstance();
+        if (previousConfigSortCode!=null){
+            user.setText(username);
+            pass.setText(password);
+        }
+
+
         //pass.setText(Login_PASS);
         alertDialogBuilder.setTitle("LOGIN");
         alertDialogBuilder.setIcon(R.mipmap.ic_launcher);
@@ -187,8 +210,7 @@ public class splashActivity extends Activity {
 
     @Override
     public Object onRetainNonConfigurationInstance() {
-        final String sortcode[] = {
-                username,password};
+        final String sortcode[] = {"rotate", username, password};
         return sortcode;
     }
 
@@ -215,3 +237,4 @@ public class splashActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 }
+
