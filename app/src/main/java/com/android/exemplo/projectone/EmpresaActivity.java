@@ -79,23 +79,6 @@ public class EmpresaActivity extends ActionBarActivity {
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-//                int z=0;
-//                for(int i=0; i<=Dados.Empresas.length;i++){
-//                    if(Dados.Empresas[i].contains(query)){
-//                        str_aux[z]=Dados.Empresas[i];
-//                        z++;
-//                    }
-//                }
-//                Toast.makeText(EmpresaActivity.this, "TEXTO - " + query + "Linhas - " + Dados.Empresas.length, Toast.LENGTH_SHORT).show();
-                if (!query.isEmpty()) {
-                    EmpresaActivity.this.adapter.getFilter().filter(query);
-//                    adapter.notifyDataSetChanged();
-                    adapter.setNotifyOnChange(true);
-                } else {
-                    EmpresaActivity.this.adapter.getFilter().filter("");
-                    adapter.notifyDataSetChanged();
-                }
                 return true;
             }
 
