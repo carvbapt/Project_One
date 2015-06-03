@@ -5,12 +5,4 @@
     android:background="@drawable/back_screen1"
     tools:context=".splashActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/BTtodash"
-        android:text="@string/btdash"
-        android:layout_marginLeft="120dp"
-        android:layout_gravity="bottom"/>
-
 </LinearLayout>
