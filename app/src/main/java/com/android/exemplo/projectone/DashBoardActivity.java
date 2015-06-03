@@ -7,11 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class DashBoardActivity extends Activity {
 
-    Button BTtoagenda;
+    Button BTtoagenda,BTtocomercial,BTtoempresa;
+    ImageButton BTItoagenda,BTItocomercial,BTItoempresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +21,30 @@ public class DashBoardActivity extends Activity {
         setContentView(R.layout.activity_dash_board);
 
         BTtoagenda=(Button)findViewById(R.id.BTtoagenda);
+        BTtocomercial=(Button)findViewById(R.id.BTtocomercial);
+        BTtoempresa=(Button)findViewById(R.id.BTtoempresa);
+
 
         BTtoagenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(DashBoardActivity.this,AgendaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        BTtocomercial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(DashBoardActivity.this,ComerciaisActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        BTtoempresa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(DashBoardActivity.this,EmpresaActivity.class);
                 startActivity(intent);
             }
         });

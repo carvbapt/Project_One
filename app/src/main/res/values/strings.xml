@@ -7,17 +7,19 @@
     <string name="btdash">Dashboard</string>
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE DASHBOARD-->
-    <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="title_activity_dash_board">DashBoard</string>
     <string name="btagenda">Agenda</string>
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE EMPRESA-->
-    <string name="title_activity_empresa">EmpresaActivity</string>
+    <string name="title_activity_empresa">Empresa</string>
+    <string name="btempresa">Empresa</string>
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE COMERCIAIS-->
-    <string name="title_activity_comerciais">ComerciaisActivity</string>
+    <string name="title_activity_comerciais">Comerciais</string>
+    <string name="btcomercial">Comercial</string>
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE AGENDA-->
-    <string name="title_activity_agenda">AgendaActivity</string>
+    <string name="title_activity_agenda">Agenda</string>
     <string name="customize">Customize</string>
     <string name="show_dialog">Show Dialog</string>
     <string name="undo">Undo</string>
