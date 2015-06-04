@@ -43,7 +43,7 @@
             android:name=".EmpDetalActivity"
             android:label="@string/title_activity_emp_detal"
             android:theme="@style/Theme.AppCompat.Light"
-            android:parentActivityName=".EmpresaActivity">
+            rivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.exemplo.projectone.EmpresaActivity" />
