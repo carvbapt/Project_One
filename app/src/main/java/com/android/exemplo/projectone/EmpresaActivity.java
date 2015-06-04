@@ -30,18 +30,13 @@ public class EmpresaActivity extends ActionBarActivity {
 
     ListView list;
     ArrayAdapter<String> adapter;
-    String message;
     Intent intent;
-    TextView dados;
-    String[] str_aux;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empresa);
-
-        dados = (TextView) findViewById(R.id.dados);
 
         list = (ListView) findViewById(R.id.lv_emp);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Dados.Empresas);
@@ -50,11 +45,10 @@ public class EmpresaActivity extends ActionBarActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                message = "Pos - " + position + "\n" + "Nome - " + Dados.Empresas[position];
-
                 intent = new Intent(EmpresaActivity.this, EmpDetalActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, message);
-//                Toast.makeText(EmpresaActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                intent.putExtra(EXTRA_MESSAGE, Dados.Empresas[position]);
+                Toast.makeText(EmpresaActivity.this, Dados.Empresas[position], Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -64,7 +58,7 @@ public class EmpresaActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_empresa, menu);
+//        getMenuInflater().inflate(R.menu.menu_empres a, menu);
 //        return true;Admi
 
         MenuInflater inflater = getMenuInflater();
