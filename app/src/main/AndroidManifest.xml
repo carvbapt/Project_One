@@ -23,7 +23,8 @@
         </activity>
         <activity
             android:name=".DashBoardActivity"
-            android:label="@string/title_activity_dash_board" >
+            android:label="@string/title_activity_dash_board"
+            android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
             android:name=".EmpresaActivity"
@@ -41,6 +42,7 @@
         <activity
             android:name=".EmpDetalActivity"
             android:label="@string/title_activity_emp_detal"
+            android:theme="@style/Theme.AppCompat.Light"
             android:parentActivityName=".EmpresaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

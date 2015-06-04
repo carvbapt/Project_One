@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 
-public class EmpDetalActivity extends Activity {
+public class EmpDetalActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

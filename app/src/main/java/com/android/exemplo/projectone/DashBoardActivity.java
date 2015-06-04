@@ -3,6 +3,7 @@ package com.android.exemplo.projectone;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.widget.ImageButton;
 import com.android.exemplo.projectone.helper.SessionManager;
 
 
-public class DashBoardActivity extends Activity {
+public class DashBoardActivity  extends ActionBarActivity {
     private SessionManager session;
     Button BTtoagenda,BTtocomercial,BTtoempresa;
     ImageButton BTItoagenda,BTItocomercial,BTItoempresa;
