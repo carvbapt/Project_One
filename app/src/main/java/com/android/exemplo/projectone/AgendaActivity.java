@@ -38,13 +38,22 @@ public class AgendaActivity extends FragmentActivity {
         cal.add(Calendar.DATE, 7);
         Date greenDate = cal.getTime();
 
+        // Termino de Contratos
+        cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 10);
+        Date redDate = cal.getTime();
+
+
+
         if (caldroidFragment != null) {
-            caldroidFragment.setBackgroundResourceForDate(R.color.caldroid_holo_blue_light,
-                    blueDate);
-            caldroidFragment.setBackgroundResourceForDate(R.color.caldroid_gray,
-                    greenDate);
+            caldroidFragment.setBackgroundResourceForDate(R.color.caldroid_holo_blue_light, blueDate);
             caldroidFragment.setTextColorForDate(R.color.caldroid_sky_blue, blueDate);
-            caldroidFragment.setTextColorForDate(R.color.caldroid_light_red, greenDate);
+
+            caldroidFragment.setBackgroundResourceForDate(R.color.color_green_400, greenDate);
+            caldroidFragment.setTextColorForDate(R.color.caldroid_white, greenDate);
+
+            caldroidFragment.setBackgroundResourceForDate(R.color.color_deep_orange_500, redDate);
+            caldroidFragment.setTextColorForDate(R.color.caldroid_white, redDate);
         }
     }
 

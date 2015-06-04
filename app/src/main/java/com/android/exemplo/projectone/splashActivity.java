@@ -20,10 +20,10 @@ import android.widget.Toast;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+import com.android.exemplo.projectone.helper.SessionManager;
 
 public class splashActivity extends Activity {
-
+    private SessionManager session;
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     String username,password;
@@ -34,6 +34,15 @@ public class splashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        // Session manager
+        session = new SessionManager(getApplicationContext());
+        // Check if user is already logged in or not
+        if (session.isLoggedIn()) {
+            // User is already logged in. Take him to main activity
+            Intent intent = new Intent(splashActivity.this, DashBoardActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         final String previousConfigSortCode[] = (String[]) getLastNonConfigurationInstance();
         if (previousConfigSortCode!=null) {
@@ -114,9 +123,10 @@ public class splashActivity extends Activity {
                                 //this will do the actual check with my back-end server for valid user/pass and callback with the response
                                 //new CheckLoginAsync(MainActivity.this,username,password).execute("","");
                                 if (username.equals("Admin") && password.equals("Admin")) {
+                                    session.setLogin(true);
                                     Intent loginPage = new Intent(splashActivity.this, DashBoardActivity.class);
                                     startActivity(loginPage);
-                                    showLoginDialog();
+                                    finish();
                                 } else {
                                     Toast.makeText(splashActivity.this, "Invalid username or password", Toast.LENGTH_LONG).show();
                                     showLoginDialog();

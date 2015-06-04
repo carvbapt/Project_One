@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.android.exemplo.projectone.helper.SessionManager;
+
 
 public class DashBoardActivity extends Activity {
-
+    private SessionManager session;
     Button BTtoagenda,BTtocomercial,BTtoempresa;
     ImageButton BTItoagenda,BTItocomercial,BTItoempresa;
 
@@ -23,6 +25,14 @@ public class DashBoardActivity extends Activity {
         BTtoagenda=(Button)findViewById(R.id.BTtoagenda);
         BTtocomercial=(Button)findViewById(R.id.BTtocomercial);
         BTtoempresa=(Button)findViewById(R.id.BTtoempresa);
+
+
+        // session manager
+        session = new SessionManager(getApplicationContext());
+
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
 
 
         BTtoagenda.setOnClickListener(new View.OnClickListener() {
@@ -70,5 +80,17 @@ public class DashBoardActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Logging out the user. Will set isLoggedIn flag to false in shared
+     * */
+    private void logoutUser() {
+        session.setLogin(false);
+
+        // Launching the login activity
+        Intent intent = new Intent(DashBoardActivity.this, splashActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
