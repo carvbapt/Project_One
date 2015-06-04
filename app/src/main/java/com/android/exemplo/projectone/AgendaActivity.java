@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.app.ActionBar;
 
 import com.android.exemplo.projectone.agenda.agendaFragment;
+import com.android.exemplo.projectone.helper.Base_Activity;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -28,7 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class AgendaActivity extends AppCompatActivity {
+public class AgendaActivity extends Base_Activity {
 
 
     @Override

@@ -47,7 +47,7 @@
             android:parentActivityName=".EmpresaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.exemplo.projectone.EmpresaActivity" />
+                android:value="com.android.exemplo.projectone.EmpresaActivity"  />
         </activity>
     </application>
 

@@ -151,7 +151,6 @@
         <item name="windowFixedHeightMajor">0dp</item>
         <item name="windowFixedHeightMinor">0dp</item>
 
-
         <item name="styleCaldroidViewLayout">@style/CaldroidDefaultCalendarViewLayout</item>
         <item name="styleCaldroidLeftArrow">@style/CaldroidDefaultLeftButton</item>
         <item name="styleCaldroidRightArrow">@style/CaldroidDefaultRightButton</item>
