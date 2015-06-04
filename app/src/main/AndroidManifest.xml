@@ -37,7 +37,8 @@
         </activity>
         <activity
             android:name=".AgendaActivity"
-            android:label="@string/title_activity_agenda" >
+            android:label="@string/title_activity_agenda"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".EmpDetalActivity"
