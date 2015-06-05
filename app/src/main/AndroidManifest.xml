@@ -41,10 +41,10 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".EmpDetalActivity"
+            android:name=".empresa.EmpDetalActivity"
             android:label="@string/title_activity_emp_detal"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:parentActivityName=".EmpresaActivity">
+            android:parentActivityName=".EmpresaActivity"
+            android:theme="@style/Theme.AppCompat.Light">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.exemplo.projectone.EmpresaActivity"  />

@@ -1,27 +1,23 @@
 package com.android.exemplo.projectone;
 
 
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.ActionBar;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.android.exemplo.projectone.empresa.EmpDetalActivity;
+import com.android.exemplo.projectone.helper.Dados;
 
 
 public class EmpresaActivity extends ActionBarActivity {
@@ -32,14 +28,17 @@ public class EmpresaActivity extends ActionBarActivity {
     ArrayAdapter<String> adapter;
     Intent intent;
 
+    Dados dados;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empresa);
 
+        dados = new Dados();
         list = (ListView) findViewById(R.id.lv_emp);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Dados.Empresas);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dados.Empresas);
         list.setAdapter(adapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -47,8 +46,8 @@ public class EmpresaActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 intent = new Intent(EmpresaActivity.this, EmpDetalActivity.class);
 
-                intent.putExtra(EXTRA_MESSAGE, Dados.Empresas[position]);
-                Toast.makeText(EmpresaActivity.this, Dados.Empresas[position], Toast.LENGTH_SHORT).show();
+                intent.putExtra(EXTRA_MESSAGE, dados.Empresas[position]);
+                //    Toast.makeText(EmpresaActivity.this, Dados.Empresas[position], Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });

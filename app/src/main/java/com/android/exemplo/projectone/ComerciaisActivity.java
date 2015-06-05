@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.exemplo.projectone.helper.Base_Activity;
 
-public class ComerciaisActivity extends Activity {
+
+public class ComerciaisActivity extends Base_Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +19,7 @@ public class ComerciaisActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_comerciais, menu);
+        getMenuInflater().inflate(R.menu.menu_normal, menu);
         return true;
     }
 

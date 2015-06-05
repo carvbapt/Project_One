@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.android.exemplo.projectone.helper.Base_Activity;
 import com.android.exemplo.projectone.helper.SessionManager;
 
 
-public class DashBoardActivity  extends ActionBarActivity {
+public class DashBoardActivity extends Base_Activity {
+    Button BTtoagenda, BTtocomercial, BTtoempresa;
+    ImageButton BTItoagenda, BTItocomercial, BTItoempresa;
     private SessionManager session;
-    Button BTtoagenda,BTtocomercial,BTtoempresa;
-    ImageButton BTItoagenda,BTItocomercial,BTItoempresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class DashBoardActivity  extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_dash_board, menu);
+        getMenuInflater().inflate(R.menu.menu_normal, menu);
         return true;
     }
 

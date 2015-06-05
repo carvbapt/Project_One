@@ -1,23 +1,20 @@
-package com.android.exemplo.projectone;
+package com.android.exemplo.projectone.empresa;
 
-import android.app.Activity;
-import android.app.TabActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.android.exemplo.projectone.helper.Dados;
+import com.android.exemplo.projectone.EmpresaActivity;
+import com.android.exemplo.projectone.R;
+import com.android.exemplo.projectone.helper.Base_Activity;
 
 
-public class EmpDetalActivity extends AppCompatActivity {
+public class EmpDetalActivity extends Base_Activity {
 
 
     String message;
@@ -26,9 +23,13 @@ public class EmpDetalActivity extends AppCompatActivity {
     int ind;
     TextView detmorada, detlocal, dettlf, detrepre, detdtmanut;
 
+    Dados dados;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empdetal);
+
+        dados = new Dados();
 
         // Criar Tabs na actividade
         tabhost = (TabHost) findViewById(R.id.tabHost);
@@ -51,8 +52,8 @@ public class EmpDetalActivity extends AppCompatActivity {
         message = intent.getStringExtra(EmpresaActivity.EXTRA_MESSAGE);
         Log.i("", message);
         ind = -1;
-        for (int i = 0; i <= Dados.Empresas.length; i++) {
-            if (Dados.Empresas[i].equals(message)) {
+        for (int i = 0; i <= dados.Empresas.length; i++) {
+            if (dados.Empresas[i].equals(message)) {
                 ind = i;
                 break;
             }
@@ -61,7 +62,7 @@ public class EmpDetalActivity extends AppCompatActivity {
         // Create the text view
         TextView textView = (TextView) findViewById(R.id.txt_detnome);
         textView.setTextSize(15);
-        textView.setText(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 35) ? 30 : Dados.Empresas[ind].length()) + "...");
+        textView.setText(dados.Empresas[ind].substring(0, (dados.Empresas[ind].length() >= 35) ? 30 : dados.Empresas[ind].length()) + "...");
 
         tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -78,16 +79,17 @@ public class EmpDetalActivity extends AppCompatActivity {
     }
 
     public void load_comercial(int ind) {
-        Toast.makeText(EmpDetalActivity.this, "Tabulado Comercial\n" + ind, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(EmpDetalActivity.this, "Tabulado Comercial\n" + ind, Toast.LENGTH_SHORT).show();
     }
 
     public void load_financeiro(int ind) {
-        Toast.makeText(EmpDetalActivity.this, "Tabulado Financeiro\n" + ind, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(EmpDetalActivity.this, "Tabulado Financeiro\n" + ind, Toast.LENGTH_SHORT).show();
     }
 
     public void load_detalhe(int ind) {
 
-        Dados ldados = new Dados();
+        StringBuilder str_dt;
+        String ch = "-";
 
         detmorada = (TextView) findViewById(R.id.txt_detmorada);
         detlocal = (TextView) findViewById(R.id.txt_detlocalidade);
@@ -101,12 +103,16 @@ public class EmpDetalActivity extends AppCompatActivity {
                 detlocal.setText(Dados.det_empresa[i][2]);
                 dettlf.setText(Dados.det_empresa[i][3]);
                 detrepre.setText(Dados.det_empresa[i][4]);
-                detdtmanut.setText(Dados.det_empresa[i][5]);
+
+                str_dt = new StringBuilder(Dados.det_empresa[i][5]);
+                str_dt.insert(2, ch);
+                str_dt.insert(5, ch);
+                detdtmanut.setText(str_dt);
                 break;
             }
         }
 
-        Toast.makeText(EmpDetalActivity.this, "Tabulado   etalhe\nposição " + ind, Toast.LENGTH_SHORT).show();
+        //   Toast.makeText(EmpDetalActivity.this, "Tabulado   etalhe\nposição " + ind, Toast.LENGTH_SHORT).show();
 
 
     }
@@ -115,7 +121,7 @@ public class EmpDetalActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_empdetal, menu);
+        getMenuInflater().inflate(R.menu.menu_normal, menu);
         return true;
     }
 

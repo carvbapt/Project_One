@@ -1,11 +1,31 @@
-package com.android.exemplo.projectone;
+package com.android.exemplo.projectone.helper;
 
 /**
  * Created by Sauca on 03-06-2015.
  */
 public class Dados {
 
-    static String[] Empresas = {
+    public static String[] Comerciais = {
+            "Ana", "João", "Manuel", "Maria", "Duarte", "Carlos", "Filipe", "André", "Andreia", "Carolina", "Carlota"
+    };
+    //    {Empresas, "Morada","Localidade","Contacto","Representante","Data_manutenção"}
+    public static String[][] det_empresa = {
+            {"0", "R. da Loja nº8", "Faro", "289289289", "Sr. Eurico", "04052015"},
+            {"3", "R. do Lagar nº40, 1ºDto.", "Lagoa", "282282282", "Sr. Daniel", "12102010"},
+            {"6", "Av. 5 Outubro nº56", "Faro", "289888888", "Sr. José", "04042004"}};
+    //    {Empresas,Comerciais,data_comercial}
+    public static String[][] com_empresa = {
+            {"1", "1", "230415"},
+            {"1", "2", "200315"},
+            {"2", "3", "20"}};
+    //    {Empresas, valores, data_val};
+    public static String[][] fin_empresa = {
+            {"1", "1.245,00", "01052015"},
+            {"1", "-1.345,00", "15052015"},
+            {"1", "-245,00", "30052015"},
+            {"1", "2.345,00", "01062015"},
+            {"1", "345,00", "15062015"}};
+    public String[] Empresas = {
             "TU, Unipessoal, Lda.", "A Industrial Farense, Lda.", "A. Pontes & N. Mealha, Lda.", "Acabe com o Vicio, Lda.",
             "ACL - Algarve Comércio e Prestação de Serviços, Lda.", "Acral - Supermercados do Algarve S A", "ADMC - Electromecânica, Lda.",
             "AEV - Associação dos Empresários de Vilamoura", "Águas do Algarve, S.A.", "AIDA - Associação Interprofissional para o Desenv. da Produção e Valorização da Alfarroba",
@@ -23,28 +43,5 @@ public class Dados {
             "Rusgarbe - Construção, Compra e Venda de Imóveis Lda", "Safe Solutions - Projectos de Consultoria, Lda.", "Salalimpa - Serviços de Limpeza Lda",
             "Seltra - Serviços, Línguas e Traduções Lda", "Serigra - Companhia Indústrial e Comerc"
     };
-
-    static String[] Comerciais = {
-            "Ana", "João", "Manuel", "Maria", "Duarte", "Carlos", "Filipe", "André", "Andreia", "Carolina", "Carlota"
-    };
-
-    //    {Empresas, "Morada","Localidade","Contacto","Representante","Data_manutenção"}
-    static String[][] det_empresa = {
-            {"0", "R. da Loja nº8", "Faro", "289289289", "Sr. Eurico", "04052015"},
-            {"3", "R. do Lagar nº40, 1ºDto.", "Lagoa", "282282282", "Sr. Daniel", "12102010"},
-            {"6", "Av. 5 Outubro nº56", "Faro", "289888888", "Sr. José", "04042004"}};
-
-    //    {Empresas,Comerciais,data_comercial}
-    static String[][] com_empresa = {
-            {"1", "1", "230415"},
-            {"1", "2", "200315"},
-            {"2", "3", "20"}};
-    //    {Empresas, valores, data_val};
-    static String[][] fin_empresa = {
-            {"1", "1.245,00", "01052015"},
-            {"1", "-1.345,00", "15052015"},
-            {"1", "-245,00", "30052015"},
-            {"1", "2.345,00", "01062015"},
-            {"1", "345,00", "15062015"}};
 
 }
