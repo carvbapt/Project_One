@@ -26,7 +26,7 @@ public class Base_Activity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_agenda, menu);
+        inflater.inflate(R.menu.menu_normal, menu);
 
         // session manager
         session = new SessionManager(getApplicationContext());
