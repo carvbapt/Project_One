@@ -14,12 +14,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.exemplo.projectone.R;
+import com.android.exemplo.projectone.splashActivity;
 
 /**
  * Created by tiagogb on 04/06/2015.
  */
 public class Base_Activity extends AppCompatActivity {
-
+    private SessionManager session;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,12 +43,28 @@ public class Base_Activity extends AppCompatActivity {
                 //  openSettings();
                 return true;
             case R.id.action_logout:
-                Toast.makeText(getApplicationContext(), "TGB: logout", Toast.LENGTH_SHORT).show();
-                //  openSettings();
+//                Toast.makeText(getApplicationContext(), "TGB: logout", Toast.LENGTH_SHORT).show();
+                logout();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void logout(){
+        // session manager
+        session = new SessionManager(getApplicationContext());
+        if (session.isLoggedIn()) {
+            logoutUser();
+        }
+    }
+    private void logoutUser() {
+        session.setLogin(false);
+
+        // Launching the login activity
+        Intent intent = new Intent(this, splashActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

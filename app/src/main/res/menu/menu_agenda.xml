@@ -27,7 +27,7 @@
             <item
                 android:id="@+id/action_logout"
                 android:orderInCategory="4"
-                android:icon="@drawable/ic_action_action_settings_power"
+                android:icon="@drawable/ic_action_logout"
                 android:title="@string/action_logout"
                 app:showAsAction="always" />
         </menu>

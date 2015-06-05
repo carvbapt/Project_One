@@ -95,7 +95,7 @@ public class EmpDetalActivity extends AppCompatActivity {
         detrepre = (TextView) findViewById(R.id.txt_detrepres);
         detdtmanut = (TextView) findViewById(R.id.txt_detdtmanut);
 
-        for (int i = 0; i <= Dados.det_empresa.length; i++) {
+        for (int i = 0; i < Dados.det_empresa.length; i++) {
             if (Dados.det_empresa[i][0].equals("" + ind)) {
                 detmorada.setText(Dados.det_empresa[i][1]);
                 detlocal.setText(Dados.det_empresa[i][2]);
