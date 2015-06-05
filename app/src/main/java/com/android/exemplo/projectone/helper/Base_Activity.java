@@ -27,6 +27,13 @@ public class Base_Activity extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_agenda, menu);
+
+        // session manager
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
+
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -44,25 +51,20 @@ public class Base_Activity extends AppCompatActivity {
                 return true;
             case R.id.action_logout:
 //                Toast.makeText(getApplicationContext(), "TGB: logout", Toast.LENGTH_SHORT).show();
-                logout();
+                logoutUser();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void logout(){
-        // session manager
-        session = new SessionManager(getApplicationContext());
-        if (session.isLoggedIn()) {
-            logoutUser();
-        }
-    }
+
     private void logoutUser() {
         session.setLogin(false);
 
         // Launching the login activity
         Intent intent = new Intent(this, splashActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
