@@ -29,15 +29,18 @@
         <activity
             android:name=".EmpresaActivity"
             android:label="@string/title_activity_empresa"
+            android:parentActivityName=".DashBoardActivity"
             android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
             android:name=".ComerciaisActivity"
+            android:parentActivityName=".DashBoardActivity"
             android:label="@string/title_activity_comerciais" >
         </activity>
         <activity
             android:name=".AgendaActivity"
             android:label="@string/title_activity_agenda"
+            android:parentActivityName=".DashBoardActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity

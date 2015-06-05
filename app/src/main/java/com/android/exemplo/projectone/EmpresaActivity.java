@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,10 +19,12 @@ import android.widget.ListView;
 
 import com.android.exemplo.projectone.empresa.EmpDetalActivity;
 import com.android.exemplo.projectone.helper.Dados;
+import com.android.exemplo.projectone.helper.SessionManager;
 
 
-public class EmpresaActivity extends ActionBarActivity {
+public class EmpresaActivity extends AppCompatActivity {
 
+    private SessionManager session;
     public final static String EXTRA_MESSAGE = "com.android.examplo.projectone.MESSAGE";
 
     ListView list;
@@ -63,6 +66,12 @@ public class EmpresaActivity extends ActionBarActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_empresa, menu);
 
+        // session manager
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
+
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
         SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
@@ -89,20 +98,30 @@ public class EmpresaActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
         switch (item.getItemId()) {
-            case R.id.action_search:
+            case R.id.action_mail:
 //                openSearch();
                 return true;
             case R.id.action_settings:
                 //  openSettings();
                 return true;
+            case R.id.action_logout:
+                logoutUser();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    private void logoutUser() {
+        session.setLogin(false);
+
+        // Launching the login activity
+        Intent intent = new Intent(this, splashActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
 

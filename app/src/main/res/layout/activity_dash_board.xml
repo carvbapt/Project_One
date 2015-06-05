@@ -33,7 +33,7 @@
 
     <Button
         android:id="@+id/BTtoagenda"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
@@ -47,7 +47,6 @@
         android:id="@+id/BTtoestatistica"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="60dp"
         android:background="@drawable/custom_button"
         android:text="@string/BTtoestatistica"
