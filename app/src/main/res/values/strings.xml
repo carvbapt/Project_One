@@ -48,6 +48,7 @@
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE ESTATISTICA-->
     <string name="BTtoestatistica">Estatística</string>
     <string name="BT_detmapa">MAPA</string>
+    <string name="title_activity_com_detal">ComDetalActivity</string>
 
 
 </resources>

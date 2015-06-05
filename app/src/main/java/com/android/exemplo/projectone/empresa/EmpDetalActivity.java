@@ -50,10 +50,10 @@ public class EmpDetalActivity extends Base_Activity {
         // Get the message from the intent
         Intent intent = getIntent();
         message = intent.getStringExtra(EmpresaActivity.EXTRA_MESSAGE);
-        Log.i("", message);
+        Log.i("", "MSG-" + message);
         ind = -1;
-        for (int i = 0; i <= dados.Empresas.length; i++) {
-            if (dados.Empresas[i].equals(message)) {
+        for (int i = 0; i <= Dados.Empresas.length; i++) {
+            if (Dados.Empresas[i].equals(message)) {
                 ind = i;
                 break;
             }
@@ -62,7 +62,7 @@ public class EmpDetalActivity extends Base_Activity {
         // Create the text view
         TextView textView = (TextView) findViewById(R.id.txt_detnome);
         textView.setTextSize(15);
-        textView.setText(dados.Empresas[ind].substring(0, (dados.Empresas[ind].length() >= 35) ? 30 : dados.Empresas[ind].length()) + "...");
+        textView.setText(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 35) ? 30 : Dados.Empresas[ind].length()) + "...");
 
         tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -113,7 +113,5 @@ public class EmpDetalActivity extends Base_Activity {
         }
 
         //   Toast.makeText(EmpDetalActivity.this, "Tabulado   etalhe\nposição " + ind, Toast.LENGTH_SHORT).show();
-
-
     }
 }
