@@ -102,9 +102,12 @@ public class EmpDetalActivity extends Base_Activity {
             load_comercial(ind);
         }
         // Create the text view
-//        TextView textView = (TextView) findViewById(R.id.txt_detnome);
-//        textView.setTextSize(15);
-//        textView.setText(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 35) ? 30 : Dados.Empresas[ind].length()) + "...");
+        TextView textView = (TextView) findViewById(R.id.txt_detnome);
+        textView.setTextSize(15);
+
+        textView.setText(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 32) ? 32 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 32)?"...":""));
+
+
 
         tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
