@@ -51,6 +51,8 @@ public class Base_Activity extends AppCompatActivity {
                 return true;
             case R.id.action_logout:
 //                Toast.makeText(getApplicationContext(), "TGB: logout", Toast.LENGTH_SHORT).show();
+                // session manager
+                session = new SessionManager(getApplicationContext());
                 logoutUser();
                 return true;
             default:

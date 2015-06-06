@@ -4,14 +4,26 @@
     android:layout_height="60dp"
     android:background="#000000">
 
-    <ImageView
-        android:id="@+id/emp_logo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <LinearLayout
+        android:id="@+id/ll_Logo"
+        android:background="@android:color/background_light"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:src="@drawable/comercial" />
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/emp_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/comercial"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/emp_nome"
@@ -19,7 +31,7 @@
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
-        android:layout_toRightOf="@+id/emp_logo"
+        android:layout_toRightOf="@+id/ll_Logo"
         android:gravity="center_vertical"
         android:text="Nome Empresa"
         android:textColor="#FFFFFF" />

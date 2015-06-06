@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.exemplo.projectone.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,9 +60,46 @@ public class ComAdapter extends ArrayAdapter {
 
         ComDataProvider dataProvider;
         dataProvider = (ComDataProvider) this.getItem(position);
-        handler.emp_logo.setImageResource(dataProvider.getEmp_logo());
+
+
+
+
+
+//        handler.emp_logo.setImageResource(dataProvider.getEmp_logo()); comentei as 19.42
         handler.emp_nome.setText(dataProvider.getEmp_nome());
         handler.emp_data.setText(dataProvider.getEmp_data());
+
+        boolean emptyImage = true;
+        if (dataProvider.getEmp_nome().contains("Rolear")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getContext()).load("http://www.rolearon.pt/images/logo_rolearon.png").into(handler.emp_logo);
+            emptyImage=false;
+        }
+        if (dataProvider.getEmp_nome().contains("Algardata")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getContext()).load("http://www.algardata.com/images/algardata/logo.png").into(handler.emp_logo);
+            emptyImage=false;
+        }
+        if (dataProvider.getEmp_nome().contains("guas do Algarve")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getContext()).load("http://www.adp.pt/files/1.jpg").into(handler.emp_logo);
+            emptyImage=false;
+        }
+        if (dataProvider.getEmp_nome().contains("ACL -")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getContext()).load("http://www.axo.pt/resources/ACL_other1_500_500.jpg").into(handler.emp_logo);
+            emptyImage=false;
+        }
+        if (dataProvider.getEmp_nome().contains("TU, Uni")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getContext()).load("http://s3.portugalio.com/u/tu/rq/turquesoriginal-unipessoal-lda-1395509040_big.png").into(handler.emp_logo);
+            emptyImage=false;
+        }
+        if (emptyImage) {
+            Picasso.with(getContext()).load("http://trilhos.visitazores.com/sites/all/modules/azores_trails/images/weather/not_available.png").into(handler.emp_logo);
+        }
+
+        System.out.println("getview:" + position + " " + convertView);
 
         return row;
     }
