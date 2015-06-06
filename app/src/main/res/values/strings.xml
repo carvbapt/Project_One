@@ -38,6 +38,20 @@
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE COMERCIAIS-->
     <string name="title_activity_comerciais">Comerciais</string>
     <string name="btcomercial">Comercial</string>
+    <string name="title_activity_com_detal">Comercial</string>
+    <string-array name="logo">
+        <item>@drawable/agenda </item>
+        <item>@drawable/comercial </item>
+        <item>@drawable/empresa </item>
+        <item>@drawable/agenda </item>
+        <item>@drawable/comercial </item>
+        <item>@drawable/empresa </item>
+        <item>@drawable/agenda </item>
+        <item>@drawable/comercial </item>
+        <item>@drawable/empresa </item>
+        <item>@drawable/empresa </item>
+    </string-array>
+
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE AGENDA-->
     <string name="title_activity_agenda">Agenda</string>
@@ -48,7 +62,8 @@
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE ESTATISTICA-->
     <string name="BTtoestatistica">Estatística</string>
     <string name="BT_detmapa">MAPA</string>
-    <string name="title_activity_com_detal">ComDetalActivity</string>
+    <string name="Tit_comemp">Empresa</string>
+    <string name="Titcomdt">Data</string>
 
 
 </resources>

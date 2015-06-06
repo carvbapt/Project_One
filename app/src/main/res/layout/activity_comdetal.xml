@@ -10,15 +10,52 @@
     tools:context="com.android.exemplo.projectone.comercial.ComDetalActivity">
 
     <TextView
-        android:id="@+id/Tv1"
+        android:id="@+id/txt_detcom"
         android:layout_width="fill_parent"
-        android:layout_height="30dp"
-        android:text="@string/hello_world" />
+        android:layout_height="wrap_content"
+        android:autoText="true"
+        android:background="#D3D3D3"
+        android:ellipsize="marquee"
+        android:ems="3"
+        android:gravity="center_horizontal"
+        android:maxLength="35"
+        android:maxLines="1"
+        android:text="@string/Txt_detnome"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/Titcomemp"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/Tit_comemp"
+            android:textIsSelectable="false"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Titcomdt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/Titcomdt"
+            android:textStyle="bold" />
+
+    </TableRow>
 
     <ListView
         android:id="@+id/LVcomdetal"
         android:layout_width="wrap_content"
-        android:layout_height="443dp"
+        android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true" />
 
