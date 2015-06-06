@@ -35,7 +35,7 @@ public class ComDetalActivity extends Base_Activity {
         // Get the message from the intent
         Intent intent = getIntent();
         message = intent.getStringExtra(ComerciaisActivity.EXTRA_MESSAGE);
-        Toast.makeText(ComDetalActivity.this, message, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ComDetalActivity.this, message, Toast.LENGTH_SHORT).show();
         // Create the text view
         TextView textView = (TextView) findViewById(R.id.txt_detcom);
         textView.setText(message);
@@ -45,10 +45,10 @@ public class ComDetalActivity extends Base_Activity {
         int i, ind = -1, z = 0;
 
         // Carregar imagem na lista
-        String[] logo2 = {"@drawable/" + R.drawable.comercial,
-                "@drawable/" + R.drawable.agenda,
-                "@drawable/" + R.drawable.empresa,
-                "@drawable/" + R.drawable.comercial};
+//        String[] logo2 = {"@drawable/" + R.drawable.comercial,
+//                "@drawable/" + R.drawable.agenda,
+//                "@drawable/" + R.drawable.empresa,
+//                "@drawable/" + R.drawable.comercial};
 
 //        emp_logo = getResources().obtainTypedArray(Integer.parseInt(String.valueOf(logo2)));
         emp_logo = getResources().obtainTypedArray(R.array.logo);
@@ -77,9 +77,9 @@ public class ComDetalActivity extends Base_Activity {
 
                 emp_nome[z] = aux.substring(0, (aux.length() >= 21) ? 20 : aux.length()) + "...";
                 str_dt = new StringBuilder(Dados.com_empresa[i][2]);
-                ch = "-";
-                str_dt.insert(2, ch);
-                str_dt.insert(5, ch);
+//                ch = "-";
+//                str_dt.insert(2, ch);
+//                str_dt.insert(5, ch);
                 emp_data[z] = "" + String.valueOf(str_dt);
                 Log.i("", "DAD-" + emp_nome[z] + " - " + emp_data[z] + " " + emp_nome.length);
                 z++;

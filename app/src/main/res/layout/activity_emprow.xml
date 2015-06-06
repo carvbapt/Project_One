@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="#D3D3D3">
+
+    <ImageButton
+        android:id="@+id/BT_comail"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/com_nome"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="#D3D3D3"
+        android:src="@drawable/ic_action_email" />
+
+    <TextView
+        android:id="@+id/com_nome"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="60dp"
+        android:gravity="center_vertical"
+        android:text="Nome Empresa"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/com_data"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@+id/com_nome"
+        android:gravity="center"
+        android:text="Data Visita"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/com_nome"
+        android:background="#000000"></View>
+
+</RelativeLayout>

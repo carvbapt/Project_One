@@ -55,13 +55,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="fill_parent"
+                    <ListView
+                        android:id="@+id/LVempdetal"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="tab Comercias"
-                        android:textStyle="bold" />
+                        android:layout_gravity="center_horizontal" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -75,7 +74,9 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="tab Finaceiro" />
+                        android:text="tab Financeiro" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -180,5 +181,6 @@
             </FrameLayout>
         </LinearLayout>
     </TabHost>
+
 
 </LinearLayout>

@@ -39,7 +39,7 @@ public class ComerciaisActivity extends Base_Activity {
                 intent = new Intent(ComerciaisActivity.this, ComDetalActivity.class);
 
                 intent.putExtra(EXTRA_MESSAGE, Dados.Comerciais[position]);
-                Toast.makeText(ComerciaisActivity.this, Dados.Comerciais[position], Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ComerciaisActivity.this, Dados.Comerciais[position], Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
