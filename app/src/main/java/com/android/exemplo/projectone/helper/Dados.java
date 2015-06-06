@@ -32,11 +32,11 @@ public class Dados {
     //    {Empresas, valores, data_val};
 
     public static String[][] fin_empresa = {
-            {"1", "1.245,00", "01-05-2015"},
-            {"1", "-1.345,00", "15-05-2015"},
-            {"1", "-245,00", "30-05-2015"},
-            {"1", "2.345,00", "01-06-2015"},
-            {"1", "345,00", "15-06-2015"}};
+            {"0", "1245.00", "01-05-2015"},
+            {"0", "-1345.00", "15-05-2015"},
+            {"0", "-245.00", "30-05-2015"},
+            {"0", "2345.00", "01-06-2015"},
+            {"0", "345.00", "15-06-2015"}};
 
     public static String[] Empresas = {
             "TU, Unipessoal, Lda.", "A Industrial Farense, Lda.", "A. Pontes & N. Mealha, Lda.", "Acabe com o Vicio, Lda.",

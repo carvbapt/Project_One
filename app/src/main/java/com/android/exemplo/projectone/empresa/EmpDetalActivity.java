@@ -1,9 +1,11 @@
 package com.android.exemplo.projectone.empresa;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -13,21 +15,34 @@ import com.android.exemplo.projectone.helper.Dados;
 import com.android.exemplo.projectone.EmpresaActivity;
 import com.android.exemplo.projectone.R;
 import com.android.exemplo.projectone.helper.Base_Activity;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.Highlight;
+import com.github.mikephil.charting.utils.PercentFormatter;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 public class EmpDetalActivity extends Base_Activity {
 
-
+    // TABULADOR DETALHES
     String message;
     TabHost tabhost;
     TabHost.TabSpec tabspe;
     int ind;
     TextView detmorada, detlocal, dettlf, detrepre, detdtmanut;
 
+    // TABULADOR COMERCIAIS
     Dados dados;
 
     ListView list;
@@ -38,9 +53,16 @@ public class EmpDetalActivity extends Base_Activity {
     StringBuilder str_dt;
     String ch, aux;
     ImageButton bt_comdetal;
-
     Date datai, dataf;
     SimpleDateFormat sdf;
+
+    //TABULADOR FINANCEIRO
+    private BarChart mChart;
+    private float[] yData;
+    private String[] xData;
+    private LinearLayout tab_fin;
+    private List<BarEntry> yVals;
+    private List<String> xVals;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,6 +207,110 @@ public class EmpDetalActivity extends Base_Activity {
 
     public void load_financeiro(int ind) {
 //        Toast.makeText(EmpDetalActivity.this, "Tabulado Financeiro\n" + ind, Toast.LENGTH_SHORT).show();
+
+        // Recolha de dados para grafico
+        int i, z = 0, count = 0;
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setMaximumFractionDigits(2);
+
+        // Tamanho do Array
+        for (i = 0; i < Dados.fin_empresa.length; i++) {
+            if (Dados.fin_empresa[i][0].equals("" + ind)) {
+                count++;
+            }
+        }
+        xData = new String[count];
+        yData = new float[count];
+
+        xVals = new ArrayList<String>();
+        yVals = new ArrayList<BarEntry>();
+
+        for (i = 0; i < Dados.fin_empresa.length; i++) {
+            if (Dados.fin_empresa[i][0].equals("" + ind)) {
+                xData[z] = Dados.fin_empresa[i][2];
+                yData[z] = Float.parseFloat(df.format(Float.parseFloat("" + Dados.fin_empresa[i][1])));
+
+                xVals.add(Dados.fin_empresa[i][2]);
+                yVals.add(new BarEntry(Float.parseFloat("" + Dados.fin_empresa[i][1]), z));
+
+                Log.i("", "FIN Valor " + yData[z] + " Data -  " + xData[z] + " " + z);
+                z++;
+            }
+        }
+
+        tab_fin = (LinearLayout) findViewById(R.id.tab_fin);
+        mChart = new BarChart(this);
+
+        // Adicionar grafico ao tabulador
+        tab_fin.addView(mChart);
+        tab_fin.setBackgroundColor(Color.LTGRAY);
+
+        // Configurar grafico
+        mChart.setDescription(" Historico Financeiro");
+
+        // Activar tudo e configurar
+        mChart.setDrawBarShadow(true);
+
+        // Activar rotação
+        mChart.setRotation(0);
+
+        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry entry, int i, Highlight highlight) {
+                // mostra valor selecionado
+                if (entry == null)
+                    return;
+                Toast.makeText(EmpDetalActivity.this, xData[entry.getXIndex()] + " = " + entry.getVal() + "€", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
+        // Configuraç~~ao de legendas
+        Legend l = mChart.getLegend();
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        l.setYEntrySpace(7);
+        l.setXEntrySpace(5);
+
+        // Criar dados para grafico
+        BarDataSet dataSet = new BarDataSet(yVals, "Valores");
+//        dataSet.setBarSpacePercent((float) 10.00);
+
+        // aDICIONAR VARIAS CORES
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+        dataSet.setColors(colors);
+
+        // instanciar o grfico
+        BarData data = new BarData(xVals, dataSet);
+//        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(8f);
+        data.setValueTextColor(Color.GRAY);
+
+        mChart.setData(data);
+
+        mChart.highlightValues(null);
+
+        // actualiza grafico
+        mChart.invalidate();
+
+
+
     }
 
     public void load_detalhe(int ind) {
