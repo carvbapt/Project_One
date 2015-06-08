@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.exemplo.projectone.R;
 import com.android.exemplo.projectone.comercial.ComDataProvider;
@@ -21,6 +22,7 @@ import java.util.List;
 public class EmpAdapter extends ArrayAdapter {
 
     List list = new ArrayList();
+    View row;
 
     public EmpAdapter(Context context, int resource) {
         super(context, resource);
@@ -44,9 +46,8 @@ public class EmpAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row;
         row = convertView;
-        DataHandler handler;
+        final DataHandler handler;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.activity_emprow, parent, false);
@@ -59,12 +60,17 @@ public class EmpAdapter extends ArrayAdapter {
             handler = (DataHandler) row.getTag();
         }
 
-//        row.setOnClickListener((View.OnClickListener) this);
-
         EmpDataProvider dataProvider;
         dataProvider = (EmpDataProvider) this.getItem(position);
         handler.com_nome.setText(dataProvider.getCom_nome());
         handler.com_data.setText(dataProvider.getCom_data());
+
+        handler.com_mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "TESTE EMAIL \n Nome - " + handler.com_nome.getText(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         return row;
     }
