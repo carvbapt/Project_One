@@ -1,6 +1,7 @@
 package com.android.exemplo.projectone.empresa;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.exemplo.projectone.AgendaActivity;
+import com.android.exemplo.projectone.EmpresaActivity;
 import com.android.exemplo.projectone.R;
 import com.android.exemplo.projectone.comercial.ComDataProvider;
 
@@ -21,9 +24,9 @@ import java.util.List;
  */
 public class EmpAdapter extends ArrayAdapter {
 
+    public final static String EXTRA_MESSAGE = "com.android.examplo.projectone.MESSAGE";
     List list = new ArrayList();
     View row;
-
     public EmpAdapter(Context context, int resource) {
         super(context, resource);
     }
@@ -68,7 +71,11 @@ public class EmpAdapter extends ArrayAdapter {
         handler.com_mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "TESTE EMAIL \n Nome - " + handler.com_nome.getText(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "TESTE EMAIL \n Nome - " + handler.com_nome.getText(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), MailActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(EXTRA_MESSAGE, handler.com_nome.getText());
+                v.getContext().startActivity(intent);
             }
         });
 

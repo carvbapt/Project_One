@@ -60,6 +60,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.exemplo.projectone.ComerciaisActivity" />
         </activity>
+        <activity
+            android:name=".empresa.MailActivity"
+            android:label="@string/title_activity_mail"
+            android:parentActivityName=".empresa.EmpDetalActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.exemplo.projectone.empresa.EmpDetalActivity" />
+        </activity>
     </application>
 
 </manifest>

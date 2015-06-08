@@ -33,6 +33,13 @@
     <string name="Txt_detrepres">--------</string>
     <string name="L_detdtmanut">Prazo Manutenção</string>
     <string name="Txt_detdtmanut">--------</string>
+    <string name="title_activity_mail">Mail Activity</string>
+    <string name="BT_sendmail">Enviar</string>
+    <string name="ET_titulo">Titulo</string>
+    <string name="ET_texto">Escreva Mensagem</string>
+    <string name="L_tomail">Para:</string>
+    <string name="L_titulo">Assunto:</string>
+    <string name="L_mensagem">Mensagem:</string>
 
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE COMERCIAIS-->

@@ -9,6 +9,10 @@ public class Dados {
             "Ana", "João", "Manuel", "Maria", "Duarte", "Carlos", "Filipe", "André", "Andreia", "Carolina", "Carlota"
     };
 
+        public static String[] Email = {"saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.com", "carvbapt@gmail.com",
+                "saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.com", "carvbapt@gmail.com",
+                "saucarv@gmail.com", "carvbapt@gmail.com"};
+
     //    {Empresas, "Morada","Localidade","Contacto","Representante","Data_manutenção"}
     public static String[][] det_empresa = {
             {"0", "R. da Loja nº8", "Faro", "289289289", "Sr. Eurico", "04-05-2015"},
@@ -35,7 +39,7 @@ public class Dados {
             {"0", "1245.00", "01-05-2015"},
             {"0", "-1345.00", "15-05-2015"},
             {"0", "-245.00", "30-05-2015"},
-            {"0", "2345.00", "01-06-2015"},
+            {"0", "20345.00", "01-06-2015"},
             {"0", "345.00", "15-06-2015"}};
 
     public static String[] Empresas = {
