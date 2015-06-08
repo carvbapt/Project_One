@@ -75,7 +75,7 @@ public class ComDetalActivity extends Base_Activity {
             if (Dados.com_empresa[i][1].equals("" + ind)) {
                 aux = Dados.Empresas[Integer.parseInt(Dados.com_empresa[i][0])];
 
-                emp_nome[z] = aux.substring(0, (aux.length() >= 21) ? 20 : aux.length()) + "...";
+                emp_nome[z] = aux.substring(0, (aux.length() >= 32) ? 32 : aux.length()) +  ((aux.length() >= 32)?"...":"");
                 str_dt = new StringBuilder(Dados.com_empresa[i][2]);
 //                ch = "-";
 //                str_dt.insert(2, ch);
