@@ -65,6 +65,7 @@
         android:id="@+id/bt_sendmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/BT_sendmail" />
+        android:text="@string/BT_sendmail"
+        android:layout_gravity="right" />
 
 </LinearLayout>
