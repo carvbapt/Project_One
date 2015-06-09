@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -46,6 +48,7 @@ public class EmpDetalActivity extends Base_Activity {
     TabHost.TabSpec tabspe;
     int ind;
     TextView detmorada, detlocal, dettlf, detrepre, detdtmanut;
+    Button btnMap;
 
     // TABULADOR COMERCIAIS
     Dados dados;
@@ -75,6 +78,8 @@ public class EmpDetalActivity extends Base_Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empdetal);
 
+
+        btnMap = (Button) findViewById(R.id.Btdetmapa);
         dados = new Dados();
 
         // Criar Tabs na actividade
@@ -112,7 +117,7 @@ public class EmpDetalActivity extends Base_Activity {
         TextView textView = (TextView) findViewById(R.id.txt_detnome);
         textView.setTextSize(15);
 
-        textView.setText(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 32) ? 32 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 32)?"...":""));
+        textView.setText(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 32) ? 32 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 32) ? "..." : ""));
 
 
 
@@ -126,6 +131,17 @@ public class EmpDetalActivity extends Base_Activity {
                 } else if (tabhost.getCurrentTab() == 2) {
                     load_detalhe(ind);
                 }
+            }
+        });
+
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EmpDetalActivity.this, MapsActivity.class);
+                String value = "posicção";
+                intent.putExtra("key", value); //Optional parameters
+                startActivity(intent);
             }
         });
 
@@ -212,6 +228,8 @@ public class EmpDetalActivity extends Base_Activity {
 //                Toast.makeText(EmpDetalActivity.this,"Mail para.... ", Toast.LENGTH_SHORT).show();
 //            }
 //        });
+
+
 
     }
 
