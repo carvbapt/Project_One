@@ -78,6 +78,15 @@
                 android:value="com.android.exemplo.projectone.EmpresaActivity" />
         </activity>
         <activity
+            android:name=".empresa.MailActivity"
+            android:label="@string/title_activity_emp_detal"
+            android:parentActivityName=".empresa.EmpDetalActivity"
+            android:theme="@style/Theme.AppCompat.Light" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.exemplo.projectone.EmpresaActivity" />
+        </activity>
+        <activity
             android:name=".comercial.ComDetalActivity"
             android:label="@string/title_activity_com_detal"
             android:parentActivityName=".ComerciaisActivity" >
