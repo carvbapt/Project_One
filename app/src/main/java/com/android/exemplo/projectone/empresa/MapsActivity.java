@@ -22,10 +22,10 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     List<Address> geocodeMatches = null;
     String address = null;
     String address_num;
+    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +98,6 @@ public class MapsActivity extends FragmentActivity {
                     break;
                 case 6:
                     Log.i("", "TGB 6");
-                    address = "Zona Ind 41, Loulé";
 
                     latitude    = 37.137957;
                     longitude   = -8.020237;
