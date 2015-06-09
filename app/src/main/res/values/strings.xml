@@ -40,6 +40,8 @@
     <string name="L_tomail">Para:</string>
     <string name="L_titulo">Assunto:</string>
     <string name="L_mensagem">Mensagem:</string>
+    <string name="title_activity_maps">Map</string>
+
 
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE COMERCIAIS-->
@@ -65,6 +67,7 @@
     <string name="customize">Customize</string>
     <string name="show_dialog">Show Dialog</string>
     <string name="undo">Undo</string>
+    <string name="title_activity_ag_detal">Agenda Detalhe</string>
 
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE ESTATISTICA-->
     <string name="BTtoestatistica">Estatística</string>

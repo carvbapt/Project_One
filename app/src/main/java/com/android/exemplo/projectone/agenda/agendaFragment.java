@@ -1,6 +1,7 @@
 package com.android.exemplo.projectone.agenda;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -49,6 +50,10 @@ public class agendaFragment extends android.support.v4.app.Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    public agendaFragment() {
+        // Required empty public constructor
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -67,8 +72,17 @@ public class agendaFragment extends android.support.v4.app.Fragment {
         return fragment;
     }
 
-    public agendaFragment() {
-        // Required empty public constructor
+    public static agendaFragment newInstance() {
+
+        agendaFragment f = new agendaFragment();
+        Bundle b = new Bundle();
+//        b.putString("msg", text);
+//        b.putInt("zona", local);
+
+
+        f.setArguments(b);
+
+        return f;
     }
 
     @Override
@@ -78,20 +92,6 @@ public class agendaFragment extends android.support.v4.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
-
-    public static agendaFragment newInstance() {
-
-        agendaFragment f = new agendaFragment();
-        Bundle b = new Bundle();
-//        b.putString("msg", text);
-//        b.putInt("zona", local);
-
-
-
-        f.setArguments(b);
-
-        return f;
     }
 
     @Override
@@ -156,6 +156,10 @@ public class agendaFragment extends android.support.v4.app.Fragment {
             public void onSelectDate(Date date, View view) {
                 Toast.makeText(getActivity().getBaseContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), AgDetalActivity.class);
+                intent.putExtra("dia", formatter.format(date));
+                startActivity(intent);
+
 
             }
 
@@ -164,6 +168,7 @@ public class agendaFragment extends android.support.v4.app.Fragment {
                 String text = "month: " + month + " year: " + year;
                 Toast.makeText(getActivity().getBaseContext(), text,
                         Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
