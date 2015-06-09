@@ -126,9 +126,9 @@ public class MapsActivity extends FragmentActivity {
         }
 
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).alpha(0.7f).title("Empresa"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).alpha(0.7f).title(Dados.Empresas[Integer.parseInt(address_num)]));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(latitude, longitude)),15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(latitude, longitude)), 15));
         // Zoom in, animating the camera.
         mMap.animateCamera(CameraUpdateFactory.zoomIn());
         // Zoom out to zoom level 10, animating with a duration of 2 seconds.
