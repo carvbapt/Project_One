@@ -2,11 +2,13 @@ package com.android.exemplo.projectone.empresa;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -32,6 +34,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -42,7 +45,11 @@ import java.util.List;
 
 public class EmpDetalActivity extends Base_Activity {
 
+    TextView textView;
+    String url;
+
     // TABULADOR DETALHES
+    ImageView logoEmp;
     String message;
     TabHost tabhost;
     TabHost.TabSpec tabspe;
@@ -78,72 +85,78 @@ public class EmpDetalActivity extends Base_Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empdetal);
 
-        if (savedInstanceState!=null) {
-            btnMap = (Button) findViewById(R.id.Btdetmapa);
-            dados = new Dados();
 
-            // Criar Tabs na actividade
-            tabhost = (TabHost) findViewById(R.id.tabHost);
-            tabhost.setup();
-            tabspe = tabhost.newTabSpec("Comercial");
-            tabspe.setContent((R.id.tab_com));
-            tabspe.setIndicator("Comercial");
-            tabhost.addTab(tabspe);
-            tabspe = tabhost.newTabSpec("Financeiro");
-            tabspe.setContent((R.id.tab_fin));
-            tabspe.setIndicator("Financeiro");
-            tabhost.addTab(tabspe);
-            tabspe = tabhost.newTabSpec("Detalhe");
-            tabspe.setContent((R.id.tab_det));
-            tabspe.setIndicator("Detalhe");
-            tabhost.addTab(tabspe);
+        btnMap = (Button) findViewById(R.id.Btdetmapa);
+        dados = new Dados();
 
-            // Get the message from the intent
+        // Criar Tabs na actividade
+        tabhost = (TabHost) findViewById(R.id.tabHost);
+        tabhost.setup();
+        tabspe = tabhost.newTabSpec("Comercial");
+        tabspe.setContent((R.id.tab_com));
+        tabspe.setIndicator("Comercial");
+        tabhost.addTab(tabspe);
+        tabspe = tabhost.newTabSpec("Financeiro");
+        tabspe.setContent((R.id.tab_fin));
+        tabspe.setIndicator("Financeiro");
+        tabhost.addTab(tabspe);
+        tabspe = tabhost.newTabSpec("Detalhe");
+        tabspe.setContent((R.id.tab_det));
+        tabspe.setIndicator("Detalhe");
+        tabhost.addTab(tabspe);
+
+        // Get the message from the intent
+
+        if (savedInstanceState==null) {
             Intent intent = getIntent();
             message = intent.getStringExtra(EmpresaActivity.EXTRA_MESSAGE);
-            Log.i("", "MSG-" + message);
-            ind = -1;
-            for (int i = 0; i < Dados.Empresas.length; i++) {
-                if (Dados.Empresas[i].equals(message)) {
-                    ind = i;
-                    break;
-                }
-            }
-
-            if (tabhost.getCurrentTab() == 0) {
-                load_comercial(ind);
-            }
-            // Create the text view
-            TextView textView = (TextView) findViewById(R.id.txt_detnome);
-            textView.setTextSize(15);
-
-            if (ind != -1)
-                textView.setText(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() > 32) ? 32 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() > 32) ? "..." : ""));
-
-
-            tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-                @Override
-                public void onTabChanged(String tabId) {
-                    if (tabhost.getCurrentTab() == 0) {
-                        load_comercial(ind);
-                    } else if (tabhost.getCurrentTab() == 1) {
-                        load_financeiro(ind);
-                    } else if (tabhost.getCurrentTab() == 2) {
-                        load_detalhe(ind);
-                    }
-                }
-            });
-
-
-            btnMap.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                    intent.putExtra("key", "" + ind); //Optional parameters
-                    startActivity(intent);
-                }
-            });
         }
+        else{
+            message = savedInstanceState.getString("message");
+        }
+        Log.i("", "MSG-" + message);
+        ind = -1;
+        for (int i = 0; i < Dados.Empresas.length; i++) {
+            if (Dados.Empresas[i].equals(message)) {
+                ind = i;
+                break;
+            }
+        }
+
+        if (tabhost.getCurrentTab() == 0) {
+            load_comercial(ind);
+        }
+        // Create the text view
+        textView = (TextView) findViewById(R.id.txt_detnome);
+        textView.setTextSize(15);
+
+        if (ind != -1)
+            textView.setText(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() > 32) ? 32 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() > 32) ? "..." : ""));
+
+
+        tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                if (tabhost.getCurrentTab() == 0) {
+                    load_comercial(ind);
+                } else if (tabhost.getCurrentTab() == 1) {
+                    load_financeiro(ind);
+                } else if (tabhost.getCurrentTab() == 2) {
+                    load_detalhe(ind);
+                }
+            }
+        });
+
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                intent.putExtra("key", "" + ind); //Optional parameters
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -462,6 +475,55 @@ public class EmpDetalActivity extends Base_Activity {
         StringBuilder str_dt;
         String ch = "-";
 
+        logoEmp =(ImageView) findViewById(R.id.imageviewLogoEmp);
+        Boolean emptyImage=true;
+        url = "www.google.pt";
+        if (textView.getText().toString().contains("Rolear")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getApplicationContext()).load("http://www.rolearon.pt/images/logo_rolearon.png").into(logoEmp);
+            url="http://www.rolearon.pt/";
+            emptyImage=false;
+        }
+        if (textView.getText().toString().contains("Algardata")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getApplicationContext()).load("http://www.algardata.com/images/algardata/logo.png").into(logoEmp);
+            url="http://www.algardata.com";
+            emptyImage=false;
+        }
+        if (textView.getText().toString().contains("guas do Algarve")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getApplicationContext()).load("http://www.adp.pt/files/1.jpg").into(logoEmp);
+            url = "http://www.aguasdoalgarve.pt/";
+            emptyImage=false;
+        }
+        if (textView.getText().toString().contains("ACL -")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getApplicationContext()).load("http://www.axo.pt/resources/ACL_other1_500_500.jpg").into(logoEmp);
+            url="http://aclcontabilidade.pai.pt/";
+            emptyImage=false;
+        }
+        if (textView.getText().toString().contains("TU, Uni")){
+//            Picasso.with(getContext()).setIndicatorsEnabled(true);    debugger
+            Picasso.with(getApplicationContext()).load("http://s3.portugalio.com/u/tu/rq/turquesoriginal-unipessoal-lda-1395509040_big.png").into(logoEmp);
+            url = "http://www.portugalio.com/turquesoriginal/";
+            emptyImage=false;
+        }
+        if (emptyImage) {
+            Picasso.with(getApplicationContext()).load("http://trilhos.visitazores.com/sites/all/modules/azores_trails/images/weather/not_available.png").into(logoEmp);
+        }
+
+        if (!emptyImage)
+        logoEmp.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                final String treathurl = url;
+                i.setData(Uri.parse(treathurl));
+                startActivity(i);;
+            }
+        });
+
         detmorada = (TextView) findViewById(R.id.txt_detmorada);
         detlocal = (TextView) findViewById(R.id.txt_detlocalidade);
         dettlf = (TextView) findViewById(R.id.txt_dettelefone);
@@ -485,4 +547,20 @@ public class EmpDetalActivity extends Base_Activity {
 
         //   Toast.makeText(EmpDetalActivity.this, "Tabulado   etalhe\nposição " + ind, Toast.LENGTH_SHORT).show();
     }
+
+
+
+//    @Override
+//    public Object onConfigurationChanges() {
+//        String a = message;
+//        keepPhotos(list);
+//        return message;
+//    }
+    @Override
+    protected void onSaveInstanceState (Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("message", message);
+    }
+
+
 }

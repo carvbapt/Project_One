@@ -116,7 +116,7 @@ public class MailActivity extends Base_Activity implements View.OnClickListener 
 //            }
 
 
-//            FUNCIONA FORA DA APLICAÇÃO
+//            FUNCIONA FORA DA APLICAcaO
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("message/rfc822");
             i.putExtra(Intent.EXTRA_EMAIL  , new String[]{rec});
