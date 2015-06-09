@@ -1,23 +1,41 @@
 package com.android.exemplo.projectone.empresa;
 
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.android.exemplo.projectone.R;
+import com.android.exemplo.projectone.helper.Dados;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    List<Address> geocodeMatches = null;
+    String address = null;
+    String address_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        Intent intent = getIntent();
+
+        address_num = intent.getExtras().getString("key");
+
         setUpMapIfNeeded();
     }
 
@@ -46,8 +64,8 @@ public class MapsActivity extends FragmentActivity {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-                     mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                             .getMap();
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
@@ -62,6 +80,58 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(10, 10)).title("Marker"));
+        List<Address> geocodeMatches = null;
+        double latitude=0, longitude=0;
+
+        if (address_num.equals("")) {
+            address = "Portugal, Faro";
+        }
+        else {
+            switch (Integer.parseInt(address_num)) {
+                case 0:
+                    Log.i("", "TGB 1");
+                    address = "Rua das Laranjeiras, N 33,  Faro";
+                    break;
+                case 3:
+                    Log.i("", "TGB 3");
+                    address = "Rua Doutor Jose de Matos, Faro";
+                    break;
+                case 6:
+                    Log.i("", "TGB 6");
+                    address = "Zona Ind 41, Loulé";
+
+                    latitude    = 37.137957;
+                    longitude   = -8.020237;
+                    break;
+                default:
+                    address="";
+            }
+
+            try {
+                if (address!="") {
+                    geocodeMatches =
+                            new Geocoder(this).getFromLocationName(address, 1);
+
+                    if (!geocodeMatches.isEmpty()) {
+                        latitude = geocodeMatches.get(0).getLatitude();
+                        longitude = geocodeMatches.get(0).getLongitude();
+                        Log.i("", "TGB ERROR: MAPA " + geocodeMatches);
+                    }
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                Log.i("", "TGB ERROR: " + e.toString());
+                e.printStackTrace();
+            }
+        }
+
+
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).alpha(0.7f).title("Empresa"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(latitude, longitude)),15));
+        // Zoom in, animating the camera.
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
     }
 }

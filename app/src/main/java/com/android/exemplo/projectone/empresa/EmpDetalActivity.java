@@ -139,8 +139,7 @@ public class EmpDetalActivity extends Base_Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EmpDetalActivity.this, MapsActivity.class);
-                String value = "posicção";
-                intent.putExtra("key", value); //Optional parameters
+                intent.putExtra("key", ""+ind); //Optional parameters
                 startActivity(intent);
             }
         });
