@@ -1,5 +1,8 @@
 <resources>
 
+    <!--TEXTOS A UTILIZAR NA ACTIVIDADE MAPA-->
+    <string name="title_activity_maps">Map</string>
+
     <!--TEXTOS A UTILIZAR NA ACTIVIDADE SPLASH-->
     <string name="app_name">Project One</string>
     <string name="hello_world">Hello world!</string>
