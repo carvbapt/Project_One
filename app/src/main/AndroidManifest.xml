@@ -5,6 +5,32 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!--
+ The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+    <permission
+        android:name="com.android.exemplo.projectone.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature"/>
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+
+    <uses-permission android:name=".permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -13,7 +39,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".splashActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar" >
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,18 +50,18 @@
         <activity
             android:name=".DashBoardActivity"
             android:label="@string/title_activity_dash_board"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".EmpresaActivity"
             android:label="@string/title_activity_empresa"
             android:parentActivityName=".DashBoardActivity"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".ComerciaisActivity"
             android:label="@string/title_activity_comerciais"
-            android:parentActivityName=".DashBoardActivity">
+            android:parentActivityName=".DashBoardActivity" >
         </activity>
         <activity
             android:name=".AgendaActivity"
@@ -47,7 +73,7 @@
             android:name=".empresa.EmpDetalActivity"
             android:label="@string/title_activity_emp_detal"
             android:parentActivityName=".EmpresaActivity"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.exemplo.projectone.EmpresaActivity" />
@@ -55,10 +81,24 @@
         <activity
             android:name=".comercial.ComDetalActivity"
             android:label="@string/title_activity_com_detal"
-            android:parentActivityName=".ComerciaisActivity">
+            android:parentActivityName=".ComerciaisActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.exemplo.projectone.ComerciaisActivity" />
+        </activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCD-HlNyQMFtnvZJDRsgBaUH7lm8mjSm-g"/>
+
+        <activity
+            android:name=".empresa.MapsActivity"
+            android:label="@string/title_activity_maps" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.exemplo.projectone.empresa.EmpDetalActivity" />
         </activity>
     </application>
 
