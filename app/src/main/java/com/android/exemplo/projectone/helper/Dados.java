@@ -36,7 +36,8 @@ public class Dados {
             {"2", "3", "01-06-2010"}};
     //    {Empresas, valores, data_val};
 
-    public static String[][] fin_empresa = {
+
+        public static String[][] fin_empresa = {
             {"0", "1245.00", "01-05-2015"},
             {"0", "-1345.00", "15-05-2015"},
             {"0", "-245.00", "30-05-2015"},
