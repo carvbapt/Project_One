@@ -46,14 +46,11 @@ public class MapsActivity extends FragmentActivity {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            Log.i("", "TGB MAPS: ");
                      mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                              .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
-
-                Log.i("", "TGB MAPS: SUCCESS");
             }
         }
     }
@@ -65,6 +62,6 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(10, 10)).title("Marker"));
     }
 }
