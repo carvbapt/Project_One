@@ -16,11 +16,16 @@ import com.android.exemplo.projectone.EmpresaActivity;
 import com.android.exemplo.projectone.R;
 import com.android.exemplo.projectone.helper.Base_Activity;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Highlight;
@@ -57,11 +62,13 @@ public class EmpDetalActivity extends Base_Activity {
     SimpleDateFormat sdf;
 
     //TABULADOR FINANCEIRO
-    private BarChart mChart;
+    private BarChart b_Chart;
+    private LineChart l_Chart;
     private float[] yData;
     private String[] xData;
     private LinearLayout tab_fin;
     private List<BarEntry> yVals;
+    private List<Entry> yVals_l;
     private List<String> xVals;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +222,8 @@ public class EmpDetalActivity extends Base_Activity {
         int i, z = 0, count = 0;
         DecimalFormat df = new DecimalFormat("#.##");
         df.setMaximumFractionDigits(2);
+        float lmax, lmin;
+        ;
 
         // Tamanho do Array
         for (i = 0; i < Dados.fin_empresa.length; i++) {
@@ -227,6 +236,9 @@ public class EmpDetalActivity extends Base_Activity {
 
         xVals = new ArrayList<String>();
         yVals = new ArrayList<BarEntry>();
+        yVals_l = new ArrayList<Entry>();
+
+        lmin = lmax = 0;
 
         for (i = 0; i < Dados.fin_empresa.length; i++) {
             if (Dados.fin_empresa[i][0].equals("" + ind)) {
@@ -235,6 +247,14 @@ public class EmpDetalActivity extends Base_Activity {
 
                 xVals.add(Dados.fin_empresa[i][2]);
                 yVals.add(new BarEntry(Float.parseFloat("" + Dados.fin_empresa[i][1]), z));
+                yVals_l.add(new Entry(Float.parseFloat("" + Dados.fin_empresa[i][1]), z));
+
+                if (lmin > Float.parseFloat("" + Dados.fin_empresa[i][1])) {
+                    lmin = Float.parseFloat("" + Dados.fin_empresa[i][1]);
+                }
+                if (lmax < Float.parseFloat("" + Dados.fin_empresa[i][1])) {
+                    lmax = Float.parseFloat("" + Dados.fin_empresa[i][1]);
+                }
 
                 Log.i("", "FIN Valor " + yData[z] + " Data -  " + xData[z] + " " + z);
                 z++;
@@ -242,28 +262,161 @@ public class EmpDetalActivity extends Base_Activity {
         }
 
         tab_fin = (LinearLayout) findViewById(R.id.tab_fin);
-        mChart = new BarChart(this);
+
+        /*********************   Barras *****************************************************/
+//        b_Chart = new BarChart(this);
+//
+//        // Adicionar grafico ao tabulador
+//        tab_fin.addView(b_Chart);
+//        tab_fin.setBackgroundColor(Color.LTGRAY);
+//
+//        // Configurar grafico
+//        b_Chart.setDescription(" Historico Financeiro");
+//
+//        b_Chart.highlightValues(null);
+//
+//        // Activar tudo e configurar
+//        b_Chart.setDrawBarShadow(true);
+//
+//        // Activar rotação
+//        b_Chart.setRotation(0);
+//
+//        b_Chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//            @Override
+//            public void onValueSelected(Entry entry, int i, Highlight highlight) {
+//                // mostra valor selecionado
+//                if (entry == null)
+//                    return;
+//                Toast.makeText(EmpDetalActivity.this, xData[entry.getXIndex()] + " = " + entry.getVal() + "€", Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected() {
+//
+//            }
+//        });
+//
+//        // Configuração de legendas
+//        Legend l = b_Chart.getLegend();
+//        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+//        l.setYEntrySpace(7);
+//        l.setXEntrySpace(5);
+//
+//        // Criar dados para grafico
+//        BarDataSet dataSet = new BarDataSet(yVals, "Valores");
+////        dataSet.setBarSpacePercent((float) 10.00);
+//
+//        // aDICIONAR VARIAS CORES
+//        ArrayList<Integer> colors = new ArrayList<Integer>();
+//
+//        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+//            colors.add(c);
+//        for (int c : ColorTemplate.JOYFUL_COLORS)
+//            colors.add(c);
+//        for (int c : ColorTemplate.COLORFUL_COLORS)
+//            colors.add(c);
+//        for (int c : ColorTemplate.LIBERTY_COLORS)
+//            colors.add(c);
+//        for (int c : ColorTemplate.PASTEL_COLORS)
+//            colors.add(c);
+//
+//        colors.add(ColorTemplate.getHoloBlue());
+//        dataSet.setColors(colors);
+//
+//        // instanciar o grfico
+//        BarData bdata = new BarData(xVals, dataSet);
+////        bdata.setValueFormatter(new PercentFormatter());
+//        bdata.setValueTextSize(8f);
+//        bdata.setValueTextColor(Color.GRAY);
+//
+//        b_Chart.setData(bdata);
+//
+//        // actualiza grafico
+//        b_Chart.invalidate();
+
+        /*********************   Linhas *****************************************************/
+
+        l_Chart = new LineChart(this);
 
         // Adicionar grafico ao tabulador
-        tab_fin.addView(mChart);
+        tab_fin.addView(l_Chart);
         tab_fin.setBackgroundColor(Color.LTGRAY);
 
-        // Configurar grafico
-        mChart.setDescription(" Historico Financeiro");
+        // no description text
+        l_Chart.setDescription("");
+        l_Chart.setNoDataTextDescription("You need to provide data for the chart.");
 
-        // Activar tudo e configurar
-        mChart.setDrawBarShadow(true);
+        // mChart.setDrawHorizontalGrid(false);
+        //
+        // enable / disable grid background
+        l_Chart.setDrawGridBackground(true);
+//        chart.getRenderer().getGridPaint().setGridColor(Color.WHITE & 0x70FFFFFF);
 
-        // Activar rotação
-        mChart.setRotation(0);
+        // enable touch gestures
+        l_Chart.setTouchEnabled(true);
 
-        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+        // enable scaling and dragging
+//        l_Chart.setDragEnabled(true);
+        l_Chart.setScaleEnabled(true);
+        l_Chart.setScaleX(.90f);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        l_Chart.setPinchZoom(true);
+
+
+        // set custom chart offsets (automatic offset calculation is hereby disabled)
+//        l_Chart.setViewPortOffsets((float) 0.1, 0, (float) 0.1, 0);
+        YAxis yAxis = l_Chart.getAxisLeft();
+//        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
+
+        float lx;
+
+        lx = lmax - lmin;
+        lx = lx * .10f;
+
+        yAxis.setAxisMaxValue(lmax + lx);
+        yAxis.setAxisMinValue(lmin - lx);
+        yAxis.setStartAtZero(false);
+        yAxis.setAxisLineColor(Color.BLACK);
+        yAxis.setAxisLineWidth(2f);
+        yAxis.enableGridDashedLine(0f, 0f, 0f);
+
+        XAxis xAxis = l_Chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(8f);
+        xAxis.setTextColor(Color.RED);
+        xAxis.setAxisLineColor(Color.BLACK);
+        xAxis.setAxisLineWidth(2f);
+        xAxis.setLabelsToSkip(0);
+
+        // create a dataset and give it a type
+        LineDataSet set1 = new LineDataSet(yVals_l, "DataSet 1");
+        // set1.setFillAlpha(110);
+        // set1.setFillColor(Color.RED);
+
+        set1.setLineWidth(2f);
+        set1.setCircleSize(4f);
+        set1.setColor(Color.BLUE);
+        set1.setCircleColor(Color.WHITE);
+        set1.setHighLightColor(Color.WHITE);
+        set1.setDrawValues(true);
+
+        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
+        dataSets.add(set1); // add the datasets
+
+        // create a data object with the datasets
+        LineData data = new LineData(xVals, dataSets);
+
+        // add data
+        l_Chart.setData(data);
+
+        l_Chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry entry, int i, Highlight highlight) {
                 // mostra valor selecionado
                 if (entry == null)
                     return;
-                Toast.makeText(EmpDetalActivity.this, xData[entry.getXIndex()] + " = " + entry.getVal() + "€", Toast.LENGTH_LONG).show();
+                Toast.makeText(EmpDetalActivity.this, xData[entry.getXIndex()] + " = " + entry.getVal() + "0€", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -272,47 +425,18 @@ public class EmpDetalActivity extends Base_Activity {
             }
         });
 
-        // Configuraç~~ao de legendas
-        Legend l = mChart.getLegend();
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        l.setYEntrySpace(7);
-        l.setXEntrySpace(5);
+        // get the legend (only possible after setting data)
+        Legend l = l_Chart.getLegend();
+        l.setEnabled(false);
 
-        // Criar dados para grafico
-        BarDataSet dataSet = new BarDataSet(yVals, "Valores");
-//        dataSet.setBarSpacePercent((float) 10.00);
+        l_Chart.getAxisLeft().setEnabled(true);
+        l_Chart.getAxisRight().setEnabled(false);
 
-        // aDICIONAR VARIAS CORES
-        ArrayList<Integer> colors = new ArrayList<Integer>();
-
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-
-        colors.add(ColorTemplate.getHoloBlue());
-        dataSet.setColors(colors);
-
-        // instanciar o grfico
-        BarData data = new BarData(xVals, dataSet);
-//        data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(8f);
-        data.setValueTextColor(Color.GRAY);
-
-        mChart.setData(data);
-
-        mChart.highlightValues(null);
-
-        // actualiza grafico
-        mChart.invalidate();
+        l_Chart.getXAxis().setEnabled(true);
 
 
+        l_Chart.invalidate();
+//        l_Chart.animateX(2500);
 
     }
 
