@@ -67,7 +67,7 @@ public class MailActivity extends Base_Activity implements View.OnClickListener 
         ed_tomail.setText(Dados.Email[ind]);
         ed_tomail.setEnabled(false);
         ed_tomail.setCursorVisible(false);
-        Toast.makeText(this, "TESTE EMAIL \n Nome - " + Dados.Email[ind], Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "TESTE EMAIL \n Nome - " + Dados.Email[ind], Toast.LENGTH_LONG).show();
 
         ed_send.setOnClickListener(this);
     }
@@ -86,7 +86,7 @@ public class MailActivity extends Base_Activity implements View.OnClickListener 
 
         session = Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("testfrom354@gmail.com", "p1234p1234");
+                return new PasswordAuthentication("carvbapt@gmail.com", "carvalhobaptista");
             }
         });
 
@@ -102,18 +102,32 @@ public class MailActivity extends Base_Activity implements View.OnClickListener 
         @Override
         protected String doInBackground(String... params) {
 
+//            try {
+//                Message message = new MimeMessage(session);
+//                message.setFrom(new InternetAddress("carvbapt@gmail.com"));
+//                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("carbapt@gmail.com"));
+//                message.setSubject(subject);
+//                message.setContent(txtmessage, "text/html; charset=utf-8");
+//                Transport.send(message);
+//            } catch (MessagingException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
+
+//            FUNCIONA FORA DA APLICAÇÃO
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("message/rfc822");
+            i.putExtra(Intent.EXTRA_EMAIL  , new String[]{rec});
+            i.putExtra(Intent.EXTRA_SUBJECT, subject);
+            i.putExtra(Intent.EXTRA_TEXT   , txtmessage);
             try {
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress("testfrom354@gmail.com"));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(rec));
-                message.setSubject(subject);
-                message.setContent(txtmessage, "text/html; charset=utf-8");
-                Transport.send(message);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
+                startActivity(Intent.createChooser(i, "Send mail..."));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(getApplication(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
             }
+
             return null;
         }
 
@@ -121,9 +135,9 @@ public class MailActivity extends Base_Activity implements View.OnClickListener 
         protected void onPostExecute(String result) {
             pdialog.dismiss();
 //            ed_tomail.setText("");
-            ed_txtmail.setText("");
-            ed_submail.setText("");
-            Toast.makeText(getApplicationContext(), "Message sent", Toast.LENGTH_LONG).show();
+//            ed_txtmail.setText("");
+//            ed_submail.setText("");
+//            Toast.makeText(getApplicationContext(), "Message sent", Toast.LENGTH_LONG).show();
 //            Intent intent= new Intent(MailActivity.this,EmpDetalActivity.class);
 //            startActivity(intent);
         }

@@ -44,8 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:editable="true"
-        android:hint="Titulo"
-        android:text="@string/ET_titulo" />
+        android:hint="@string/ET_titulo" />
 
     <TextView
         android:id="@+id/textView2"
@@ -59,9 +58,8 @@
         android:id="@+id/ed_txtmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Escreva Mensagem"
-        android:inputType="textMultiLine"
-        android:text="@string/ET_texto" />
+        android:hint="@string/ET_texto"
+        android:inputType="textMultiLine"  />
 
     <Button
         android:id="@+id/bt_sendmail"
