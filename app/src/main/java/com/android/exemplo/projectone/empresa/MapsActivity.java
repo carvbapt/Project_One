@@ -3,9 +3,12 @@ package com.android.exemplo.projectone.empresa;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.support.v4.app.FragmentActivity;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.exemplo.projectone.R;
 import com.android.exemplo.projectone.helper.Dados;
@@ -13,11 +16,19 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity {
@@ -89,48 +100,171 @@ public class MapsActivity extends FragmentActivity {
         else {
             switch (Integer.parseInt(address_num)) {
                 case 0:
-                    Log.i("", "TGB 1");
                     address = "Rua das Laranjeiras, N 33,  Faro";
                     break;
                 case 3:
-                    Log.i("", "TGB 3");
                     address = "Rua Doutor Jose de Matos, Faro";
                     break;
                 case 6:
-                    Log.i("", "TGB 6");
-
-                    latitude    = 37.137957;
-                    longitude   = -8.020237;
+                    address ="Zona Ind Lt 41, 8100-000 LOULÉ";
+//                    latitude    = 37.137957;
+//                    longitude   = -8.020237;
                     break;
                 default:
-                    address="";
+                    address="Portugal, Faro";
+
             }
 
-            try {
-                if (address!="") {
-                    geocodeMatches =
-                            new Geocoder(this).getFromLocationName(address, 1);
+//            try {
 
-                    if (!geocodeMatches.isEmpty()) {
-                        latitude = geocodeMatches.get(0).getLatitude();
-                        longitude = geocodeMatches.get(0).getLongitude();
-                        Log.i("", "TGB ERROR: MAPA " + geocodeMatches);
-                    }
-                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                Log.i("", "TGB ERROR: " + e.toString());
-                e.printStackTrace();
-            }
+
+//            if (address!="") {
+
+//                    geocodeMatches =
+//                            new Geocoder(this).getFromLocationName(address, 1);
+            new GetAddressPositionTask().execute(address);
+//                    if (!geocodeMatches.isEmpty()) {
+//                        latitude = geocodeMatches.get(0).getLatitude();
+//                        longitude = geocodeMatches.get(0).getLongitude();
+//                    }
+//            }
+//            }
+//            catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                Log.i("", "TGB ERROR: " + e.toString());
+//                e.printStackTrace();
+//            }
         }
 
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).alpha(0.7f).title(Dados.Empresas[Integer.parseInt(address_num)]));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(latitude, longitude)), 15));
-        // Zoom in, animating the camera.
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
-        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).alpha(0.7f).title(Dados.Empresas[Integer.parseInt(address_num)]));
+//
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(latitude, longitude)), 15));
+//        // Zoom in, animating the camera.
+//        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+//        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
     }
+
+
+    private class GetAddressPositionTask extends
+            AsyncTask<String, Integer, LatLng> {
+
+
+        String TAG = "GetAddressPositionTask";
+        LatLng position;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected LatLng doInBackground(String... plookupString) {
+
+            String lookupString = plookupString[0];
+            final String lookupStringUriencoded = Uri.encode(lookupString);
+            position = null;
+
+            Log.i(TAG, "lookupStringUriencoded: " + lookupStringUriencoded);
+            if ( lookupStringUriencoded.equals("")){
+
+                return (new LatLng(10, 10));
+            }
+
+            // best effort zoom
+            try {
+//                if (geocoder != null) {
+                List<Address> addresses = new Geocoder(getApplicationContext()).getFromLocationName(
+                        lookupString, 1);
+                if (addresses != null && !addresses.isEmpty()) {
+                    Address first_address = addresses.get(0);
+                    position = new LatLng(first_address.getLatitude(),
+                            first_address.getLongitude());
+                }
+//                } else {
+//                    Log.e(TAG, "geocoder was null, is the module loaded? "
+//                            + "isLoaded");
+//                }
+
+            } catch (IOException e) {
+                Log.e(TAG, "geocoder failed, moving on to HTTP");
+            }
+            // try HTTP lookup to the maps API
+            if (position == null) {
+                HttpGet httpGet = new HttpGet(
+                        "http://maps.google.com/maps/api/geocode/json?address="
+                                + lookupStringUriencoded + "&sensor=true");
+                HttpClient client = new DefaultHttpClient();
+                HttpResponse response;
+                StringBuilder stringBuilder = new StringBuilder();
+
+                try {
+                    response = client.execute(httpGet);
+                    HttpEntity entity = response.getEntity();
+                    InputStream stream = entity.getContent();
+                    int b;
+                    while ((b = stream.read()) != -1) {
+                        stringBuilder.append((char) b);
+                    }
+                } catch (ClientProtocolException e) {
+                } catch (IOException e) {
+                }
+
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    // Log.d("MAPSAPI", stringBuilder.toString());
+
+                    jsonObject = new JSONObject(stringBuilder.toString());
+                    if (jsonObject.getString("status").equals("OK")) {
+                        jsonObject = jsonObject.getJSONArray("results")
+                                .getJSONObject(0);
+                        jsonObject = jsonObject.getJSONObject("geometry");
+                        jsonObject = jsonObject.getJSONObject("location");
+                        String lat = jsonObject.getString("lat");
+                        String lng = jsonObject.getString("lng");
+
+                        Log.d("MAPSAPI", "latlng " + lat + ", "
+                                + lng);
+
+                        position = new LatLng(Double.valueOf(lat),
+                                Double.valueOf(lng));
+                    }
+
+                } catch (JSONException e) {
+                    Log.e(TAG, e.getMessage(), e);
+                }
+
+            }
+            Log.i(TAG, "tgb position: " + position);
+            return position;
+        }
+
+        @Override
+        protected void onPostExecute(LatLng result) {
+
+            if (!result.toString().equals("lat/lng: (37.0193548,-7.9304397)")) {
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+
+            mMap.addMarker(new MarkerOptions().position(result).alpha(0.7f).title(Dados.Empresas[Integer.parseInt(address_num)]));
+
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((result), 15));
+                // Zoom in, animating the camera.
+                mMap.animateCamera(CameraUpdateFactory.zoomIn());
+                // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+            }
+            else{
+                Toast.makeText(getApplication(), "Sem localização definida.", Toast.LENGTH_LONG).show();
+            }
+
+            super.onPostExecute(result);
+        }
+
+    };
+
 }
+
+

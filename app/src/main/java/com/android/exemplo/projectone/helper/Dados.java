@@ -9,8 +9,8 @@ public class Dados {
             "Ana", "João", "Manuel", "Maria", "Duarte", "Carlos", "Filipe", "André", "Andreia", "Carolina", "Carlota"
     };
 
-        public static String[] Email = {"saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.com", "carvbapt@gmail.com",
-                "saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.com", "carvbapt@gmail.com",
+        public static String[] Email = {"saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.pt", "carvbapt@gmail.com",
+                "saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.pt", "carvbapt@gmail.com",
                 "saucarv@gmail.com", "carvbapt@gmail.com"};
 
     //    {Empresas, "Morada","Localidade","Contacto","Representante","Data_manutenção"}

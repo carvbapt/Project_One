@@ -46,8 +46,8 @@
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
                 <LinearLayout
                     android:id="@+id/tab_com"
@@ -73,11 +73,24 @@
 
                 <LinearLayout
                     android:id="@+id/tab_det"
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     android:labelFor="@string/tab_det"
                     android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageviewLogoEmp"
+                            android:clickable="true" />
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/Ldetmorada"
