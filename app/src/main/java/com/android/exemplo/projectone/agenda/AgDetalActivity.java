@@ -32,7 +32,7 @@ public class AgDetalActivity extends Base_Activity {
     TabHost.TabSpec tspe_ag;
     int ind;
 
-    TextView tv_agtab1, tv_agtab2;
+    TextView txt_agdata;
 
     ArrayList<Map<String, String>> list_c;
     String[] from_c;
@@ -75,8 +75,8 @@ public class AgDetalActivity extends Base_Activity {
         Log.i("", "MSG-" + message);
 
         // Create the text view
-        tv_agtab1 = (TextView) findViewById(R.id.tv_agtab1);
-        tv_agtab2 = (TextView) findViewById(R.id.tv_agtab2);
+        txt_agdata = (TextView) findViewById(R.id.txt_agdata);
+        txt_agdata.setText(message);
 
         // listar items da base de dados
         list_c = buildData_c();
@@ -87,7 +87,7 @@ public class AgDetalActivity extends Base_Activity {
         to_c = new int[2];
 
         if (th_ag.getCurrentTab() == 0) {
-            tv_agtab1.setText(message + " Comercial");
+
             from_c[0]="comercial";
             from_c[1]="data";
             to_c[0]=R.id.tv_agcom;
@@ -106,18 +106,16 @@ public class AgDetalActivity extends Base_Activity {
                     from_c[1]="data";
                     to_c[0]=R.id.tv_agcom;
                     to_c[1]=R.id.tv_agdata;
-                    tv_agtab1.setText(message + " Comercial");
                     lv_c = (ListView) findViewById(R.id.lv_agcom);
                     adapter_c = new SimpleAdapter(AgDetalActivity.this,list_c,R.layout.activity_agcomrow, from_c, to_c);
                     lv_c.setAdapter(adapter_c);
 
                 } else if (th_ag.getCurrentTab() == 1) {
-                    tv_agtab2.setText(message + " Financeiro");
+//                    tv_agtab2.setText(message + " Financeiro");
                     from_c[0]="financeiro";
                     from_c[1]="valor";
                     to_c[0]=R.id.tv_agcom;
                     to_c[1]=R.id.tv_agdata;
-                    tv_agtab2.setText(message + " Financeiro");
                     lv_f = (ListView) findViewById(R.id.lv_agfin);
                     adapter_f = new SimpleAdapter(AgDetalActivity.this,list_f,R.layout.activity_agcomrow, from_c, to_c);
                     lv_f.setAdapter(adapter_f);
@@ -151,9 +149,53 @@ public class AgDetalActivity extends Base_Activity {
 
         List<Ag_Comercial> comList;
 
-        int i=0;
+        int i=0,y=1;
+
+        double[] val = new double[30];
+        String[] aux=new String[30];
+
+
+        val[0]=Double.parseDouble(Dados.fin_empresa[0][1]);
+        aux[0]=Dados.fin_empresa[0][0];
+
+        Log.i("", "Indice0" + " Empresa -" + Dados.Empresas[Integer.parseInt(aux[0])] );
+
+        for(i=0; i<Dados.fin_empresa.length;i++){
+            for(int z=i+1; z<Dados.fin_empresa.length;z++){
+                if(!Dados.fin_empresa[i][0].equals(Dados.fin_empresa[z][0]) && !Dados.fin_empresa[i][0].equals(aux[y-1])) {
+                    aux[y] = Dados.Empresas[Integer.parseInt(Dados.fin_empresa[i][0])];
+
+                  //  Log.i("", "Indice" + y + " Empresa -" + aux[y] );///+ " Valor " + String.format("%.2f", val[y]) + "€");
+                    y++;
+                    i=z;
+                }else{
+                    i++;
+                }
+            }
+        }
+
+        for(i=0; i<aux.length;i++){
+            for(y=0;y<Dados.fin_empresa.length;y++){
+                if(aux[i].equals(Dados.fin_empresa[y][0])){
+                    if(Double.parseDouble(Dados.fin_empresa[y][1])<val[i]){
+                        val[i]=Double.parseDouble(Dados.fin_empresa[y][1]);
+                        Log.i("", "Indice" + y + " Empresa -" + aux[i] + " Valor " + String.format("%.2f", val[i]) + "€");
+                    }
+                }
+
+
+            }
+        }
+
+
+
         for(i=0; i<Dados.fin_empresa.length;i++) {
-            list.add(putData2(Dados.Empresas[parseInt(Dados.com_empresa[i][0])].substring(0, (Dados.Empresas[parseInt(Dados.com_empresa[i][0])].length() >= 32) ? 32 : Dados.Empresas[parseInt(Dados.com_empresa[i][0])].length()) + ((Dados.Empresas[parseInt(Dados.com_empresa[i][0])].length() >= 32) ? "..." : ""), Dados.fin_empresa[i][1]));
+
+            float val1=Float.parseFloat(Dados.fin_empresa[i][1]);
+
+            int ind=Integer.parseInt(Dados.fin_empresa[i][0]);
+            list.add(putData2(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 22) ? 22 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 22) ? "..." : ""), String.format("%.2f", val1 ) +"€"));
+//
         }
 
         return list;

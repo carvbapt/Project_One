@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,7 +6,24 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.android.exemplo.projectone.agenda.AgDetalActivity">
+
+    <TextView
+        android:id="@+id/txt_agdata"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:autoText="true"
+        android:background="#D3D3D3"
+        android:ellipsize="marquee"
+        android:ems="3"
+        android:gravity="center_horizontal"
+        android:maxLength="35"
+        android:maxLines="1"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
 
     <TabHost
         android:id="@+id/th_ag"
@@ -37,12 +54,6 @@
                     android:orientation="vertical"
                     android:weightSum="1">
 
-                    <TextView
-                        android:id="@+id/tv_agtab1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hello_world" />
-
                     <ListView
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent"
@@ -59,11 +70,6 @@
                     android:labelFor="@string/tab_fin"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_agtab2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hello_world" />
                     <ListView
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent"
@@ -76,4 +82,4 @@
         </LinearLayout>
     </TabHost>
 
-</RelativeLayout>
+</LinearLayout>
