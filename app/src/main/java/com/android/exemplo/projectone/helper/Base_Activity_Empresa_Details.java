@@ -43,6 +43,10 @@ public class Base_Activity_Empresa_Details extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.idMaps:
+                Toast.makeText(getApplicationContext(), "TGB: Maps", Toast.LENGTH_SHORT).show();
+//                openSearch();
+                return true;
             case R.id.action_mail:
                 Toast.makeText(getApplicationContext(), "TGB: Email", Toast.LENGTH_SHORT).show();
 //                openSearch();

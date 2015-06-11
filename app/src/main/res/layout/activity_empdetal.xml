@@ -180,7 +180,8 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="25dp"
                         android:text="@string/BT_detmapa"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="invisible"/>
 
                 </LinearLayout>
 

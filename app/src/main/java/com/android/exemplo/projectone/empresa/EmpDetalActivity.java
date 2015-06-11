@@ -1,10 +1,17 @@
 package com.android.exemplo.projectone.empresa;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,6 +27,8 @@ import com.android.exemplo.projectone.helper.Dados;
 import com.android.exemplo.projectone.EmpresaActivity;
 import com.android.exemplo.projectone.R;
 import com.android.exemplo.projectone.helper.Base_Activity;
+import com.android.exemplo.projectone.helper.SessionManager;
+import com.android.exemplo.projectone.splashActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -45,8 +54,9 @@ import java.util.List;
 
 
 
-public class EmpDetalActivity extends Base_Activity_Empresa_Details {
+public class EmpDetalActivity extends AppCompatActivity {
 
+    private SessionManager session;
     TextView textView;
     String url;
 
@@ -563,6 +573,101 @@ public class EmpDetalActivity extends Base_Activity_Empresa_Details {
         super.onSaveInstanceState(outState);
         outState.putString("message", message);
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_normal_emp_detail, menu);
+
+        // session manager
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
+
+        if (!hasConnectivity(getApplicationContext(), false)){
+            logoutUser();
+        }
+
+
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.idMaps:
+//                Toast.makeText(getApplicationContext(), "TGB: Maps", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                intent.putExtra("key", "" + ind); //Optional parameters
+                startActivity(intent);
+                return true;
+            case R.id.action_mail:
+                Toast.makeText(getApplicationContext(), "TGB: Email", Toast.LENGTH_SHORT).show();
+//                openSearch();
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(getApplicationContext(), "TGB: settings", Toast.LENGTH_SHORT).show();
+                //  openSettings();
+                return true;
+            case R.id.action_logout:
+//                Toast.makeText(getApplicationContext(), "TGB: logout", Toast.LENGTH_SHORT).show();
+                // session manager
+                session = new SessionManager(getApplicationContext());
+                logoutUser();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void logoutUser() {
+        session.setLogin(false);
+
+        // Launching the login activity
+        Intent intent = new Intent(this, splashActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    public static boolean hasConnectivity(Context context,boolean wifiOnly)
+    {
+        try
+        {
+            boolean haveConnectedWifi = false;
+            boolean haveConnectedMobile = false;
+
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+            for (NetworkInfo ni : netInfo)
+            {
+                if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                    if (ni.isConnected())
+                        haveConnectedWifi = true;
+                if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                    if (ni.isConnected())
+                        haveConnectedMobile = true;
+            }
+
+            if (wifiOnly)
+                return haveConnectedWifi;
+            else
+                return haveConnectedWifi || haveConnectedMobile;
+
+        }
+        catch(Exception e)
+        {
+            return true; //just in case it fails move on, say yeah! we have Internet connection (hopefully)
+        }
+
+    }
+
 
 
 }
