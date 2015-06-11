@@ -406,35 +406,43 @@ public class EmpDetalActivity extends AppCompatActivity {
         // enable scaling and dragging
 //        l_Chart.setDragEnabled(true);
         l_Chart.setScaleEnabled(true);
-        l_Chart.setScaleX(.90f);
-        l_Chart.setScaleY(.90f);
-        l_Chart.setPadding(0,0,-25,0);
+        l_Chart.setScaleX(.96f);
+        l_Chart.setScaleY(.96f);
+        l_Chart.setPadding(0, 0, -25, 0);
 
         // if disabled, scaling can be done on x- and y-axis separately
         l_Chart.setPinchZoom(true);
 
-
-        // set custom chart offsets (automatic offset calculation is hereby disabled)
-//        l_Chart.setViewPortOffsets((float) 0.1, 0, (float) 0.1, 0);
-        YAxis yAxis = l_Chart.getAxisLeft();
-//        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
 
         float lx;
 
         lx = lmax - lmin;
         lx = lx * .10f;
 
-        yAxis.setAxisMaxValue(lmax + lx);
-        yAxis.setAxisMinValue(lmin - lx);
-        yAxis.setStartAtZero(false);
-        yAxis.setAxisLineColor(Color.BLACK);
-        yAxis.setAxisLineWidth(2f);
-        yAxis.enableGridDashedLine(0f, 0f, 0f);
+        // set custom chart offsets (automatic offset calculation is hereby disabled)
+//        l_Chart.setViewPortOffsets((float) 0.1, 0, (float) 0.1, 0);
+        YAxis yAxis_l = l_Chart.getAxisLeft();
+//        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
+        yAxis_l.setAxisMaxValue(lmax + lx);
+        yAxis_l.setAxisMinValue(lmin - lx);
+        yAxis_l.setStartAtZero(false);
+        yAxis_l.setAxisLineColor(Color.BLACK);
+        yAxis_l.setAxisLineWidth(2f);
+        yAxis_l.enableGridDashedLine(0f, 0f, 0f);
+
+        YAxis yAxis_r = l_Chart.getAxisRight();
+        yAxis_r.setLabelCount(0);
+//        yAxis_r.setAxisMaxValue(lmax + lx);
+//        yAxis_r.setAxisMinValue(lmin - lx);
+        yAxis_r.setTextSize(12f);
+        yAxis_r.setStartAtZero(false);
+        yAxis_r.setAxisLineWidth(2f);
+        yAxis_r.setAxisLineColor(Color.BLACK);
 
         XAxis xAxis = l_Chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextSize(12f);
-        xAxis.setTextColor(Color.RED);
+        xAxis.setTextSize(14f);
+        xAxis.setTextColor(Color.BLACK);
         xAxis.setAxisLineColor(Color.BLACK);
         xAxis.setAxisLineWidth(2f);
         xAxis.setLabelsToSkip(0);
@@ -482,7 +490,7 @@ public class EmpDetalActivity extends AppCompatActivity {
         l.setEnabled(false);
 
         l_Chart.getAxisLeft().setEnabled(true);
-        l_Chart.getAxisRight().setEnabled(false);
+        l_Chart.getAxisRight().setEnabled(true);
 
         l_Chart.getXAxis().setEnabled(true);
 
