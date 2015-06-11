@@ -18,6 +18,8 @@ import com.android.exemplo.projectone.helper.Base_Activity;
 import com.android.exemplo.projectone.helper.Dados;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,47 +151,75 @@ public class AgDetalActivity extends Base_Activity {
 
         List<Ag_Comercial> comList;
 
-        int i=0,y=1;
+       String[][] array_fin= new String[Dados.fin_empresa.length][];
+       int count=0;
 
-        double[] val = new double[30];
-        String[] aux=new String[30];
-
-
-        val[0]=Double.parseDouble(Dados.fin_empresa[0][1]);
-        aux[0]=Dados.fin_empresa[0][0];
-
-        Log.i("", "Indice0" + " Empresa -" + Dados.Empresas[Integer.parseInt(aux[0])] );
-
-        for(i=0; i<Dados.fin_empresa.length;i++){
-            for(int z=i+1; z<Dados.fin_empresa.length;z++){
-                if(!Dados.fin_empresa[i][0].equals(Dados.fin_empresa[z][0]) && !Dados.fin_empresa[i][0].equals(aux[y-1])) {
-                    aux[y] = Dados.Empresas[Integer.parseInt(Dados.fin_empresa[i][0])];
-
-                  //  Log.i("", "Indice" + y + " Empresa -" + aux[y] );///+ " Valor " + String.format("%.2f", val[y]) + "€");
-                    y++;
-                    i=z;
-                }else{
-                    i++;
-                }
+        Arrays.sort(Dados.fin_empresa, new Comparator<String[]>() {
+            @Override
+            public int compare(final String[] entry1, final String[] entry2) {
+                final String time1 = entry1[2];
+                final String time2 = entry2[2];
+                return time1.compareTo(time2);
             }
+        });
+
+        for (final String[] s : Dados.fin_empresa) {
+//            Log.i("","linha -  "+s[0] + " " + s[1]+ " "+ s[2]);
         }
 
-        for(i=0; i<aux.length;i++){
-            for(y=0;y<Dados.fin_empresa.length;y++){
-                if(aux[i].equals(Dados.fin_empresa[y][0])){
-                    if(Double.parseDouble(Dados.fin_empresa[y][1])<val[i]){
-                        val[i]=Double.parseDouble(Dados.fin_empresa[y][1]);
-                        Log.i("", "Indice" + y + " Empresa -" + aux[i] + " Valor " + String.format("%.2f", val[i]) + "€");
-                    }
-                }
-
-
+        Arrays.sort(Dados.com_empresa, new Comparator<String[]>() {
+            @Override
+            public int compare(final String[] entry1, final String[] entry2) {
+                final String time1 = entry1[2];
+                final String time2 = entry2[2];
+                return time1.compareTo(time2);
             }
+        });
+
+        for (final String[] s : Dados.com_empresa) {
+            Log.i("","linha2 -  "+s[0] + " " + s[1]+ " "+ s[2]);
         }
 
+//        int i=0,y=1;
+//
+//        double[] val = new double[Dados.fin_empresa.length];
+//        String[] aux=new String[Dados.fin_empresa.length];
+//        int count=0;
+//
+//        val[0]=Double.parseDouble(Dados.fin_empresa[0][1]);
+//        aux[0]=Dados.fin_empresa[0][0];
+//
+//
+//
+////        Log.i("", "Indice" + " Empresa -" + Dados.Empresas[Integer.parseInt(aux[0])] );
+//
+//        for(i=0; i<Dados.fin_empresa.length;i++){
+//            for(int z=i+1; z<Dados.fin_empresa.length;z++){
+//                if(!Dados.fin_empresa[i][0].equals(Dados.fin_empresa[z][0]) && !Dados.fin_empresa[i][0].equals(aux[y-1])) {
+//                    aux[y] = Dados.fin_empresa[i][0];
+//                    val[y]=Double.parseDouble(Dados.fin_empresa[i][1]);
+//                    count++;
+////                    Log.i("", "Indice" + y + " Empresa -" + aux[y] );///+ " Valor " + String.format("%.2f", val[y]) + "€");
+//                    y++;
+//                    i=z;
+//                }else{
+//                    i++;
+//                }
+//            }
+//        }
+//////      for(i=0; i<=count+1;i++){
+//            for(y=0;y<Dados.fin_empresa.length;y++){
+//                if(aux[i].equals(Dados.fin_empresa[y][0] )){
+//                    if(Double.parseDouble(Dados.fin_empresa[y][1])<val[i]){
+//                        val[i]=Double.parseDouble(Dados.fin_empresa[y][1]);
+//                        Log.i("", "Indice" + i + " Empresa -" + aux[i] + " Valor " + String.format("%.2f", val[i]) + "€" + count);
+//
+//                    }
+//                }
+//            }
+//        }
 
-
-        for(i=0; i<Dados.fin_empresa.length;i++) {
+        for(int i=0; i<Dados.fin_empresa.length;i++) {
 
             float val1=Float.parseFloat(Dados.fin_empresa[i][1]);
 
