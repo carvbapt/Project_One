@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/idMaps"
+        android:orderInCategory="0"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_map"
+        android:title="MenusTeste"/>
+    <item
+        android:id="@+id/idMenu"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_overflow"
+        android:title="MenusTeste">
+        <menu>
+
+            <item
+                android:id="@+id/action_mail"
+                android:icon="@drawable/ic_action_email"
+                android:orderInCategory="3"
+                android:title="@string/action_mail"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/action_settings"
+                android:orderInCategory="4"
+                android:icon="@drawable/ic_action_settings"
+                android:title="@string/action_settings"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/action_logout"
+                android:orderInCategory="5"
+                android:icon="@drawable/ic_action_logout"
+                android:title="@string/action_logout"
+                app:showAsAction="always" />
+        </menu>
+    </item>
+
+</menu>

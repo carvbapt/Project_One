@@ -15,6 +15,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.exemplo.projectone.helper.Base_Activity_Empresa_Details;
 import com.android.exemplo.projectone.helper.Dados;
 import com.android.exemplo.projectone.EmpresaActivity;
 import com.android.exemplo.projectone.R;
@@ -43,7 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 
-public class EmpDetalActivity extends Base_Activity {
+public class EmpDetalActivity extends Base_Activity_Empresa_Details {
 
     TextView textView;
     String url;
