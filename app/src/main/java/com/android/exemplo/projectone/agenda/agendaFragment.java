@@ -154,8 +154,8 @@ public class agendaFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void onSelectDate(Date date, View view) {
-                Toast.makeText(getActivity().getBaseContext(), formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getBaseContext(), formatter.format(date),
+//                        Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), AgDetalActivity.class);
                 final SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy.MM.dd");
                 intent.putExtra("dia", formatter.format(date));
@@ -166,24 +166,24 @@ public class agendaFragment extends android.support.v4.app.Fragment {
             @Override
             public void onChangeMonth(int month, int year) {
                 String text = "month: " + month + " year: " + year;
-                Toast.makeText(getActivity().getBaseContext(), text,
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getBaseContext(), text,
+//                        Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onLongClickDate(Date date, View view) {
-                Toast.makeText(getActivity().getBaseContext(),
-                        "Long click " + formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getBaseContext(),
+//                        "Long click " + formatter.format(date),
+//                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCaldroidViewCreated() {
                 if (caldroidFragment.getLeftArrowButton() != null) {
-                    Toast.makeText(getActivity().getBaseContext(),
-                            "Caldroid view is created", Toast.LENGTH_SHORT)
-                            .show();
+//                    Toast.makeText(getActivity().getBaseContext(),
+//                            "Caldroid view is created", Toast.LENGTH_SHORT)
+//                            .show();
                 }
             }
 

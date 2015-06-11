@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,6 +60,7 @@ public class EmpDetalActivity extends AppCompatActivity {
     private SessionManager session;
     TextView textView;
     String url;
+    TextView graflabel;
 
     // TABULADOR DETALHES
     ImageView logoEmp;
@@ -97,20 +99,20 @@ public class EmpDetalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empdetal);
 
-
+        graflabel=(TextView)findViewById(R.id.et_graflabel);
         btnMap = (Button) findViewById(R.id.Btdetmapa);
         dados = new Dados();
 
         // Criar Tabs na actividade
         tabhost = (TabHost) findViewById(R.id.tabHost);
         tabhost.setup();
-        tabspe = tabhost.newTabSpec("Comercial");
-        tabspe.setContent((R.id.tab_com));
-        tabspe.setIndicator("Comercial");
-        tabhost.addTab(tabspe);
         tabspe = tabhost.newTabSpec("Financeiro");
         tabspe.setContent((R.id.tab_fin));
         tabspe.setIndicator("Financeiro");
+        tabhost.addTab(tabspe);
+        tabspe = tabhost.newTabSpec("Comercial");
+        tabspe.setContent((R.id.tab_com));
+        tabspe.setIndicator("Comercial");
         tabhost.addTab(tabspe);
         tabspe = tabhost.newTabSpec("Detalhe");
         tabspe.setContent((R.id.tab_det));
@@ -136,7 +138,7 @@ public class EmpDetalActivity extends AppCompatActivity {
         }
 
         if (tabhost.getCurrentTab() == 0) {
-            load_comercial(ind);
+            load_financeiro(ind);
         }
         // Create the text view
         textView = (TextView) findViewById(R.id.txt_detnome);
@@ -150,9 +152,9 @@ public class EmpDetalActivity extends AppCompatActivity {
             @Override
             public void onTabChanged(String tabId) {
                 if (tabhost.getCurrentTab() == 0) {
-                    load_comercial(ind);
-                } else if (tabhost.getCurrentTab() == 1) {
                     load_financeiro(ind);
+                } else if (tabhost.getCurrentTab() == 1) {
+                    load_comercial(ind);
                 } else if (tabhost.getCurrentTab() == 2) {
                     load_detalhe(ind);
                 }
@@ -265,7 +267,7 @@ public class EmpDetalActivity extends AppCompatActivity {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setMaximumFractionDigits(2);
         float lmax, lmin;
-        ;
+
 
         // Tamanho do Array
         for (i = 0; i < Dados.fin_empresa.length; i++) {
@@ -280,14 +282,18 @@ public class EmpDetalActivity extends AppCompatActivity {
         yVals = new ArrayList<BarEntry>();
         yVals_l = new ArrayList<Entry>();
 
+        String graf_label=null;
         lmin = lmax = 0;
 
         for (i = 0; i < Dados.fin_empresa.length; i++) {
             if (Dados.fin_empresa[i][0].equals("" + ind)) {
+
+                graflabel.setText( "ANO " + Dados.fin_empresa[i][2].substring(0,4));
+
                 xData[z] = Dados.fin_empresa[i][2];
                 yData[z] = Float.parseFloat(df.format(Float.parseFloat("" + Dados.fin_empresa[i][1])));
 
-                xVals.add(Dados.fin_empresa[i][2]);
+                xVals.add(Dados.fin_empresa[i][2].substring(5, Dados.fin_empresa[i][2].length()));
                 yVals.add(new BarEntry(Float.parseFloat("" + Dados.fin_empresa[i][1]), z));
                 yVals_l.add(new Entry(Float.parseFloat("" + Dados.fin_empresa[i][1]), z));
 
@@ -385,7 +391,7 @@ public class EmpDetalActivity extends AppCompatActivity {
         tab_fin.setBackgroundColor(Color.LTGRAY);
 
         // no description text
-        l_Chart.setDescription("");
+        l_Chart.setDescription(graf_label);
         l_Chart.setNoDataTextDescription("You need to provide data for the chart.");
 
         // mChart.setDrawHorizontalGrid(false);
@@ -401,6 +407,8 @@ public class EmpDetalActivity extends AppCompatActivity {
 //        l_Chart.setDragEnabled(true);
         l_Chart.setScaleEnabled(true);
         l_Chart.setScaleX(.90f);
+        l_Chart.setScaleY(.90f);
+        l_Chart.setPadding(0,0,-25,0);
 
         // if disabled, scaling can be done on x- and y-axis separately
         l_Chart.setPinchZoom(true);
@@ -425,22 +433,24 @@ public class EmpDetalActivity extends AppCompatActivity {
 
         XAxis xAxis = l_Chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextSize(8f);
+        xAxis.setTextSize(12f);
         xAxis.setTextColor(Color.RED);
         xAxis.setAxisLineColor(Color.BLACK);
         xAxis.setAxisLineWidth(2f);
         xAxis.setLabelsToSkip(0);
+        xAxis.setXOffset(-25f);
+
 
         // create a dataset and give it a type
         LineDataSet set1 = new LineDataSet(yVals_l, "DataSet 1");
         // set1.setFillAlpha(110);
         // set1.setFillColor(Color.RED);
 
-        set1.setLineWidth(2f);
+        set1.setLineWidth(4f);
         set1.setCircleSize(4f);
-        set1.setColor(Color.BLUE);
+        set1.setColor(0x7040BDFC);
         set1.setCircleColor(Color.WHITE);
-        set1.setHighLightColor(Color.WHITE);
+        set1.setHighLightColor(0x7040BDFC);
         set1.setDrawValues(true);
 
         ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
@@ -475,7 +485,6 @@ public class EmpDetalActivity extends AppCompatActivity {
         l_Chart.getAxisRight().setEnabled(false);
 
         l_Chart.getXAxis().setEnabled(true);
-
 
         l_Chart.invalidate();
 //        l_Chart.animateX(2500);
