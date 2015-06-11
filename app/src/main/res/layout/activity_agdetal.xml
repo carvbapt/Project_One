@@ -54,6 +54,32 @@
                     android:orientation="vertical"
                     android:weightSum="1">
 
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal">
+
+                        <TextView
+                            android:id="@+id/Titcomemp"
+                            android:layout_width="175dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="Comercial"
+                            android:textIsSelectable="false"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Titcomdt"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="Empresa"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+
                     <ListView
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent"
@@ -69,6 +95,32 @@
                     android:layout_height="match_parent"
                     android:labelFor="@string/tab_fin"
                     android:orientation="vertical">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal">
+
+                        <TextView
+                            android:id="@+id/Titfinemp"
+                            android:layout_width="175dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="Empresa"
+                            android:textIsSelectable="false"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Titfinvalor"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="Valor"
+                            android:textStyle="bold" />
+
+                    </TableRow>
 
                     <ListView
                         android:layout_width="match_parent"

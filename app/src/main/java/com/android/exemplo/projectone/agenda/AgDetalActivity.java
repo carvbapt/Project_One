@@ -17,9 +17,12 @@ import com.android.exemplo.projectone.R;
 import com.android.exemplo.projectone.helper.Base_Activity;
 import com.android.exemplo.projectone.helper.Dados;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +108,7 @@ public class AgDetalActivity extends Base_Activity {
             public void onTabChanged(String tabId) {
                 if (th_ag.getCurrentTab() == 0) {
                     from_c[0]="comercial";
-                    from_c[1]="data";
+                    from_c[1]="empresa";
                     to_c[0]=R.id.tv_agcom;
                     to_c[1]=R.id.tv_agdata;
                     lv_c = (ListView) findViewById(R.id.lv_agcom);
@@ -131,9 +134,24 @@ public class AgDetalActivity extends Base_Activity {
 
         List<Ag_Comercial> comList;
 
+        Arrays.sort(Dados.com_empresa, new Comparator<String[]>() {
+            @Override
+            public int compare(final String[] entry1, final String[] entry2) {
+                final String time1 = entry1[2];
+                final String time2 = entry2[2];
+                return time1.compareTo(time2);
+            }
+        });
+
+        for (final String[] s : Dados.com_empresa) {
+//            Log.i("","linha2 -  "+s[0] + " " + s[1]+ " "+ s[2]);
+        }
+
+
         int i=0;
         for(i=0; i<Dados.com_empresa.length;i++) {
-            list.add(putData(Dados.Comerciais[parseInt(Dados.com_empresa[i][1])], Dados.com_empresa[i][2]));
+            int ind=Integer.parseInt(Dados.com_empresa[i][0]);
+            list.add(putData(Dados.Comerciais[parseInt(Dados.com_empresa[i][1])], Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 22) ? 22 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 22) ? "..." : "")));
         }
 
         return list;
@@ -142,7 +160,7 @@ public class AgDetalActivity extends Base_Activity {
     private HashMap<String, String> putData(String comercial, String data) {
         HashMap<String, String> item = new HashMap<String, String>();
         item.put("comercial", comercial);
-        item.put("data", data);
+        item.put("empresa", data);
         return item;
     }
 
@@ -151,8 +169,10 @@ public class AgDetalActivity extends Base_Activity {
 
         List<Ag_Comercial> comList;
 
-       String[][] array_fin= new String[Dados.fin_empresa.length][];
+       String[][] array_fin= new String[Dados.fin_empresa.length][3];
        int count=0;
+       Date date;
+       SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         Arrays.sort(Dados.fin_empresa, new Comparator<String[]>() {
             @Override
@@ -164,70 +184,27 @@ public class AgDetalActivity extends Base_Activity {
         });
 
         for (final String[] s : Dados.fin_empresa) {
-//            Log.i("","linha -  "+s[0] + " " + s[1]+ " "+ s[2]);
-        }
+            try {
+                date=formatter.parse(s[2]);
 
-        Arrays.sort(Dados.com_empresa, new Comparator<String[]>() {
-            @Override
-            public int compare(final String[] entry1, final String[] entry2) {
-                final String time1 = entry1[2];
-                final String time2 = entry2[2];
-                return time1.compareTo(time2);
+                //            if(formatter.format(date).equals(message)) {
+                array_fin[count][0] = s[0];
+                array_fin[count][1] = s[1];
+                array_fin[count][2] = s[2];
+                count++;
+//            }
+                Log.i("", "linha S -  " + s[0] + " " + s[1] + " " +date +"->" +message );
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        });
-
-        for (final String[] s : Dados.com_empresa) {
-            Log.i("","linha2 -  "+s[0] + " " + s[1]+ " "+ s[2]);
         }
 
-//        int i=0,y=1;
-//
-//        double[] val = new double[Dados.fin_empresa.length];
-//        String[] aux=new String[Dados.fin_empresa.length];
-//        int count=0;
-//
-//        val[0]=Double.parseDouble(Dados.fin_empresa[0][1]);
-//        aux[0]=Dados.fin_empresa[0][0];
-//
-//
-//
-////        Log.i("", "Indice" + " Empresa -" + Dados.Empresas[Integer.parseInt(aux[0])] );
-//
-//        for(i=0; i<Dados.fin_empresa.length;i++){
-//            for(int z=i+1; z<Dados.fin_empresa.length;z++){
-//                if(!Dados.fin_empresa[i][0].equals(Dados.fin_empresa[z][0]) && !Dados.fin_empresa[i][0].equals(aux[y-1])) {
-//                    aux[y] = Dados.fin_empresa[i][0];
-//                    val[y]=Double.parseDouble(Dados.fin_empresa[i][1]);
-//                    count++;
-////                    Log.i("", "Indice" + y + " Empresa -" + aux[y] );///+ " Valor " + String.format("%.2f", val[y]) + "€");
-//                    y++;
-//                    i=z;
-//                }else{
-//                    i++;
-//                }
-//            }
-//        }
-//////      for(i=0; i<=count+1;i++){
-//            for(y=0;y<Dados.fin_empresa.length;y++){
-//                if(aux[i].equals(Dados.fin_empresa[y][0] )){
-//                    if(Double.parseDouble(Dados.fin_empresa[y][1])<val[i]){
-//                        val[i]=Double.parseDouble(Dados.fin_empresa[y][1]);
-//                        Log.i("", "Indice" + i + " Empresa -" + aux[i] + " Valor " + String.format("%.2f", val[i]) + "€" + count);
-//
-//                    }
-//                }
-//            }
-//        }
+        for(int i=0; i<count;i++) {
 
-        for(int i=0; i<Dados.fin_empresa.length;i++) {
-
-            float val1=Float.parseFloat(Dados.fin_empresa[i][1]);
-
-            int ind=Integer.parseInt(Dados.fin_empresa[i][0]);
-            list.add(putData2(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 22) ? 22 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 22) ? "..." : ""), String.format("%.2f", val1 ) +"€"));
-//
+            float val=Float.parseFloat(array_fin[i][1]);
+            int ind=Integer.parseInt(array_fin[i][0]);
+            list.add(putData2(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 22) ? 22 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 22) ? "..." : ""), String.format("%.2f", val ) +"€"));
         }
-
         return list;
     }
 
