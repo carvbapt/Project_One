@@ -157,10 +157,10 @@ public class agendaFragment extends android.support.v4.app.Fragment {
                 Toast.makeText(getActivity().getBaseContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), AgDetalActivity.class);
+                final SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy.MM.dd");
                 intent.putExtra("dia", formatter.format(date));
+                intent.putExtra("data", formatter2.format(date));
                 startActivity(intent);
-
-
             }
 
             @Override

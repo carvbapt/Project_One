@@ -17,6 +17,7 @@ import com.android.exemplo.projectone.R;
 import com.android.exemplo.projectone.helper.Base_Activity;
 import com.android.exemplo.projectone.helper.Dados;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import static java.lang.Integer.*;
 public class AgDetalActivity extends Base_Activity {
 
     // TABULADOR DETALHES
-    String message;
+    String message,dataf;
     TabHost th_ag;
     TabHost.TabSpec tspe_ag;
     int ind;
@@ -77,6 +78,7 @@ public class AgDetalActivity extends Base_Activity {
         // Get the message from the intent
         Intent intent = getIntent();
         message = intent.getExtras().getString("dia");
+        dataf = intent.getExtras().getString("data");
         Log.i("", "MSG-" + message);
 
         // Create the text view
@@ -93,8 +95,8 @@ public class AgDetalActivity extends Base_Activity {
 
         if (th_ag.getCurrentTab() == 0) {
 
-            from_c[0]="comercial";
-            from_c[1]="data";
+            from_c[0]="empresa";
+            from_c[1]="comercial";
             to_c[0]=R.id.tv_agcom;
             to_c[1]=R.id.tv_agdata;
 
@@ -107,8 +109,8 @@ public class AgDetalActivity extends Base_Activity {
             @Override
             public void onTabChanged(String tabId) {
                 if (th_ag.getCurrentTab() == 0) {
-                    from_c[0]="comercial";
-                    from_c[1]="empresa";
+                    from_c[0]="empresa";
+                    from_c[1]="comercial";
                     to_c[0]=R.id.tv_agcom;
                     to_c[1]=R.id.tv_agdata;
                     lv_c = (ListView) findViewById(R.id.lv_agcom);
@@ -117,7 +119,7 @@ public class AgDetalActivity extends Base_Activity {
 
                 } else if (th_ag.getCurrentTab() == 1) {
 //                    tv_agtab2.setText(message + " Financeiro");
-                    from_c[0]="financeiro";
+                    from_c[0]="empresa";
                     from_c[1]="valor";
                     to_c[0]=R.id.tv_agcom;
                     to_c[1]=R.id.tv_agdata;
@@ -134,33 +136,41 @@ public class AgDetalActivity extends Base_Activity {
 
         List<Ag_Comercial> comList;
 
+        String[][] array_com= new String[Dados.com_empresa.length][3];
+        int count=0;
+
         Arrays.sort(Dados.com_empresa, new Comparator<String[]>() {
             @Override
             public int compare(final String[] entry1, final String[] entry2) {
-                final String time1 = entry1[2];
-                final String time2 = entry2[2];
+                final String time1 = entry1[1];
+                final String time2 = entry2[1];
                 return time1.compareTo(time2);
             }
         });
 
         for (final String[] s : Dados.com_empresa) {
-//            Log.i("","linha2 -  "+s[0] + " " + s[1]+ " "+ s[2]);
+
+            if(s[2].equals(dataf)) {
+                array_com[count][0] = s[0];
+                array_com[count][1] = s[1];
+                array_com[count][2] = s[2];
+                count++;
+                Log.i("", "linha S -  " + s[0] + " " + s[1] + " "+ s[2] + "->"+dataf  +" " + count );
+            }
         }
 
-
-        int i=0;
-        for(i=0; i<Dados.com_empresa.length;i++) {
-            int ind=Integer.parseInt(Dados.com_empresa[i][0]);
-            list.add(putData(Dados.Comerciais[parseInt(Dados.com_empresa[i][1])], Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 22) ? 22 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 22) ? "..." : "")));
+        for(int i=0; i<count;i++) {
+            int ind=Integer.parseInt(array_com[i][0]);
+            list.add(putData(Dados.Empresas[ind].substring(0, (Dados.Empresas[ind].length() >= 22) ? 22 : Dados.Empresas[ind].length()) + ((Dados.Empresas[ind].length() >= 22) ? "..." : ""),Dados.Comerciais[parseInt(array_com[i][1])]));
         }
 
         return list;
     }
 
-    private HashMap<String, String> putData(String comercial, String data) {
+    private HashMap<String, String> putData(String empresa, String comercial) {
         HashMap<String, String> item = new HashMap<String, String>();
+        item.put("empresa", empresa);
         item.put("comercial", comercial);
-        item.put("empresa", data);
         return item;
     }
 
@@ -171,8 +181,6 @@ public class AgDetalActivity extends Base_Activity {
 
        String[][] array_fin= new String[Dados.fin_empresa.length][3];
        int count=0;
-       Date date;
-       SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         Arrays.sort(Dados.fin_empresa, new Comparator<String[]>() {
             @Override
@@ -184,19 +192,15 @@ public class AgDetalActivity extends Base_Activity {
         });
 
         for (final String[] s : Dados.fin_empresa) {
-            try {
-                date=formatter.parse(s[2]);
 
-                //            if(formatter.format(date).equals(message)) {
+          if(s[2].equals(dataf)) {
                 array_fin[count][0] = s[0];
                 array_fin[count][1] = s[1];
                 array_fin[count][2] = s[2];
                 count++;
-//            }
-                Log.i("", "linha S -  " + s[0] + " " + s[1] + " " +date +"->" +message );
-            } catch (ParseException e) {
-                e.printStackTrace();
+//                Log.i("", "linha S -  " + s[0] + " " + s[1] + " "+ s[2] + "->"+dataf  +" " + count );
             }
+
         }
 
         for(int i=0; i<count;i++) {
@@ -208,9 +212,9 @@ public class AgDetalActivity extends Base_Activity {
         return list;
     }
 
-    private HashMap<String, String> putData2(String financeiro, String valor) {
+    private HashMap<String, String> putData2(String empresa, String valor) {
         HashMap<String, String> item = new HashMap<String, String>();
-        item.put("financeiro", financeiro);
+        item.put("empresa", empresa);
         item.put("valor", valor);
         return item;
     }

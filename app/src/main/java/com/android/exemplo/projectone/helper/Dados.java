@@ -9,9 +9,9 @@ public class Dados {
             "Ana", "João", "Manuel", "Maria", "Duarte", "Carlos", "Filipe", "André", "Andreia", "Carolina", "Carlota"
     };
 
-        public static String[] Email = {"saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.pt", "carvbapt@gmail.com",
-                "saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.pt", "carvbapt@gmail.com",
-                "saucarv@gmail.com", "carvbapt@gmail.com"};
+    public static String[] Email = {"saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.pt", "carvbapt@gmail.com",
+            "saucarv@gmail.com", "carvbapt@gmail.com", "sauca@iol.pt", "carvbapt@gmail.com",
+            "saucarv@gmail.com", "carvbapt@gmail.com"};
 
     //    {Empresas, "Morada","Localidade","Contacto","Representante","Data_manutenção"}
     public static String[][] det_empresa = {
@@ -20,9 +20,9 @@ public class Dados {
             {"6", "Zona Ind Lt 41", "8100-000 LOULÉ", "289888888", "Sr. José", "04-04-2004"}};
 
 
-        //    {Empresas,Comerciais,data_comercial}
+    //    {Empresas,Comerciais,data_comercial}
     public static String[][] com_empresa = {
-            {"0", "1", "2015.06.15"},
+            {"0", "1", "2015.06.11"},
             {"0", "2", "2015.03.20"},
             {"0", "3", "2005.05.05"},
             {"0", "2", "2012.09.05"},
@@ -30,20 +30,22 @@ public class Dados {
             {"0", "2", "2012.10.05"},
             {"0", "4", "2011.12.02"},
             {"0", "5", "2011.12.02"},
-            {"4", "2", "2005.06.10"},
+            {"4", "2", "2015.06.11"},
             {"8", "2", "2012.09.05"},
             {"42", "2", "2013.12.02"},
             {"2", "3", "2015.06.11"}};
     //    {Empresas, valores, data_val};
 
-
-        public static String[][] fin_empresa = {
+    public static String[][] fin_empresa = {
             {"0", "345.00", "2015.06.11"},
             {"6", "20345.00", "2015.06.11"},
             {"9", "-245.00", "2015.06.11"},
             {"0", "-1345.00", "2015.06.01"},
-            {"0", "1245.00", "2015.05.15"},
-            };
+            {"0", "-945.00", "2015.05.15"},
+            {"0", "-45.00", "2015.05.01"},
+            {"0", "1245.00", "2015.04.15"},
+
+    };
 
     public static String[] Empresas = {
             "TU, Unipessoal, Lda.", "A Industrial Farense, Lda.", "A. Pontes & N. Mealha, Lda.", "Acabe com o Vicio, Lda.",
