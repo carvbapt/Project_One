@@ -25,12 +25,18 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#D3D3D3"
         android:layout_weight=".60">
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/L_manutencao"
+            android:background="#D3D3D3"
             android:id="@+id/et_titulo"
             android:textStyle="bold"
             android:gravity="center_horizontal|clip_horizontal"
@@ -39,6 +45,7 @@
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:background="#D3D3D3"
             android:id="@+id/lv_ag" />
     </LinearLayout>
 
