@@ -76,6 +76,7 @@
     <string name="BT_detmapa">MAPA</string>
     <string name="Tit_comemp">Empresa</string>
     <string name="Titcomdt">Data</string>
+    <string name="L_manutencao">Prazo Manutenção Expirado</string>
 
 
 </resources>

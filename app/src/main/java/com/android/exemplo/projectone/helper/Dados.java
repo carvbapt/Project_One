@@ -15,9 +15,9 @@ public class Dados {
 
     //    {Empresas, "Morada","Localidade","Contacto","Representante","Data_manutenção"}
     public static String[][] det_empresa = {
-            {"0", "Rua das Laranjeiras, Nº 33 Conceição", "8005-446 FARO", "289289289", "Sr. Eurico", "04-05-2015"},
-            {"3", "Dr José de Matos, 1 - 3", "8000-000 FARO", "282282282", "Sr. Daniel", "12-10-2010"},
-            {"6", "Zona Ind Lt 41", "8100-000 LOULÉ", "289888888", "Sr. José", "04-04-2004"}};
+            {"0", "Rua das Laranjeiras, Nº 33 Conceição", "8005-446 FARO", "289289289", "Sr. Eurico", "2015.05.05"},
+            {"3", "Dr José de Matos, 1 - 3", "8000-000 FARO", "282282282", "Sr. Daniel", "2015.10.10"},
+            {"6", "Zona Ind Lt 41", "8100-000 LOULÉ", "289888888", "Sr. José", "2015.06.11"}};
 
 
     //    {Empresas,Comerciais,data_comercial}
