@@ -3,37 +3,56 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/BTtoempresa"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/btempresa"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_weight="0.33">
+        <Button
+            android:id="@+id/BTtoempresa"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:text="@string/btempresa"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical|bottom"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/BTtocomercial"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/btcomercial"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_weight="0.33">
 
-    <Button
-        android:id="@+id/BTtoagenda"
-        android:layout_width="fill_parent"
+        <Button
+            android:id="@+id/BTtocomercial"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:text="@string/btcomercial"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/btagenda"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_weight="0.33">
+        <Button
+            android:id="@+id/BTtoagenda"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:text="@string/btagenda"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="top|center_vertical"/>
+    </LinearLayout>
 
 </LinearLayout>
