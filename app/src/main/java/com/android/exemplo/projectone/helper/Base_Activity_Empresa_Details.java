@@ -36,7 +36,6 @@ public class Base_Activity_Empresa_Details extends AppCompatActivity {
         }
 
 
-
         return super.onCreateOptionsMenu(menu);
 
     }

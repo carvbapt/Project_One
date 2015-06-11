@@ -44,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 
+
 public class EmpDetalActivity extends Base_Activity_Empresa_Details {
 
     TextView textView;
